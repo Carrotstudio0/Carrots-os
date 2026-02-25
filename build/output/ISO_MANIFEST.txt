@@ -1,0 +1,31 @@
+CarrotOS 1.0 ISO Build Manifest
+=====================================
+
+BUILD DATE: 2026-02-25
+VERSION: 1.0.0
+ARCHITECTURE: x86-64
+
+CONTENTS:
+- boot/bootloader.bin
+- boot/carrot-kernel
+- boot/grub/grub.cfg
+- carroot/sbin/init
+- carroot/usr/bin/carrot-shell
+- etc/carrot-*.conf (9 files)
+
+COMPONENTS:
+- bootloader.c (100+ lines)
+- kernel.c (400+ lines)
+- init.c (400+ lines)
+- shell.cpp (300+ lines)
+
+BUILD ENV:
+- Windows (MinGW-w64)
+- Python 3.14.3
+- GCC 6.3.0
+
+ISO FILES:
+- carrotos-1.0-x86_64.iso (original)
+- carrotos-1.0-x86_64-complete.zip (full)
+
+=====================================
