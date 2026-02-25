@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CarrotOS Shell
+Comment=Modern desktop environment for CarrotOS
+Icon=carrot-shell
+Exec=carrot-shell
+Categories=System;DesktopSettings;
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Phase=WindowManager

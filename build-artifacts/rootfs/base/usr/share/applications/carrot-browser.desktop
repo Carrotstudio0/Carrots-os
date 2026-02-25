@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Web Browser
+Comment=Browse the internet
+Icon=internet-web-browser
+Exec=carrot-browser %U
+Categories=Network;WebBrowser;
+MimeType=text/html;application/xhtml+xml;

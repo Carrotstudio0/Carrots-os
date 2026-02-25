@@ -1,0 +1,93 @@
+#!/bin/bash
+# CarrotOS System Services Manager
+# Manages critical services and daemons
+
+set -e
+
+SERVICES_DIR="/etc/carrot-services"
+LOG_FILE="/var/log/carrot-services.log"
+PID_DIR="/var/run"
+
+log_service() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
+    echo "$1"
+}
+
+# Create necessary directories
+mkdir -p "$PID_DIR"
+mkdir -p "$(dirname $LOG_FILE)"
+
+log_service "=========================================="
+log_service "CarrotOS Services Initialization"
+log_service "=========================================="
+
+# Start essential services
+log_service "Starting system services..."
+
+# 1. Syslog daemon
+if command -v rsyslogd &> /dev/null; then
+    log_service "Starting rsyslogd..."
+    rsyslogd -n &
+    echo $! > "$PID_DIR/rsyslogd.pid"
+else
+    log_service "WARNING: rsyslogd not found"
+fi
+
+# 2. D-Bus daemon (for IPC)
+if command -v dbus-daemon &> /dev/null; then
+    log_service "Starting D-Bus daemon..."
+    mkdir -p /var/run/dbus
+    dbus-uuidgen --ensure
+    dbus-daemon --system &
+    echo $! > "$PID_DIR/dbus.pid"
+else
+    log_service "WARNING: D-Bus not found (IPC disabled)"
+fi
+
+# 3. UDev (device management)
+if command -v udevd &> /dev/null; then
+    log_service "Starting udevd..."
+    udevd --daemon
+    udevadm trigger
+    udevadm settle
+else
+    log_service "WARNING: udevd not found (device management limited)"
+fi
+
+# 4. Network services
+if [ -f /etc/network/interfaces ]; then
+    log_service "Configuring network interfaces..."
+    ifup lo 2>/dev/null || true
+    ifup eth0 2>/dev/null || true
+else
+    log_service "No network configuration found (network disabled)"
+fi
+
+# 5. SSH server (optional)
+if command -v sshd &> /dev/null; then
+    log_service "Starting SSH server..."
+    mkdir -p /var/run/sshd
+    sshd -D &
+    echo $! > "$PID_DIR/sshd.pid"
+fi
+
+# 6. Cron daemon
+if command -v crond &> /dev/null; then
+    log_service "Starting cron daemon..."
+    crond -f &
+    echo $! > "$PID_DIR/crond.pid"
+fi
+
+# 7. Python application server (optional)
+if [ -f /usr/lib/carrot/apps/control-center.py ]; then
+    log_service "Starting CarrotOS Control Center..."
+    python3 /usr/lib/carrot/apps/control-center.py --daemon &
+    echo $! > "$PID_DIR/control-center.pid"
+fi
+
+log_service "=========================================="
+log_service "Services started successfully"
+log_service "=========================================="
+
+# Keep waiting for signals
+wait

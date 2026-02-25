@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Text Editor
+Comment=Simple text editor
+Icon=accessories-text-editor
+Exec=carrot-editor %F
+Categories=Utility;TextEditor;
+MimeType=text/plain;

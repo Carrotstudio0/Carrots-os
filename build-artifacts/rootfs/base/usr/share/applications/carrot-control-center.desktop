@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Control Center
+Comment=Central control panel for CarrotOS
+Icon=preferences-system
+Exec=carrot-control-center
+Categories=System;Settings;Administration;
+X-KDE-SubstituteUID=true
+X-KDE-Username=root
