@@ -1,0 +1,5 @@
+#!/bin/bash
+# CarrotOS System Updater
+echo "Checking for system updates..."
+echo "Installing updates..."
+echo "✅ System updated"

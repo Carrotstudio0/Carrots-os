@@ -1,0 +1,8 @@
+# /etc/fstab
+# device                  mount-point  fs-type  options  dump  pass
+/dev/mapper/carrot-root   /            ext4     defaults 0     1
+/dev/mapper/carrot-boot   /boot        ext4     defaults 0     2
+/dev/mapper/carrot-home   /home        ext4     defaults 0     2
+tmpfs                     /tmp         tmpfs    defaults 0     0
+tmpfs                     /var/tmp     tmpfs    defaults 0     0
+tmpfs                     /run         tmpfs    defaults 0     0

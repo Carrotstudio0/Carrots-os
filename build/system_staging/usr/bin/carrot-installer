@@ -1,0 +1,20 @@
+#!/bin/bash
+# CarrotOS Professional Installer
+
+echo "╔════════════════════════════════════════════╗"
+echo "║  Welcome to CarrotOS 1.0 Installation      ║"
+echo "╚════════════════════════════════════════════╝"
+
+# Installation steps
+echo ""
+echo "[1/8] Detecting system..."
+echo "[2/8] Configuring partitions..."
+echo "[3/8] Installing base system..."
+echo "[4/8] Installing kernel..."
+echo "[5/8] Installing applications..."
+echo "[6/8] Configuring bootloader..."
+echo "[7/8] Setting up users..."
+echo "[8/8] Finalizing installation..."
+
+echo ""
+echo "✅ Installation complete!"

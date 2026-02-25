@@ -1,0 +1,3 @@
+#!/bin/bash
+# CarrotOS Initial Setup
+echo "Setting up CarrotOS..."

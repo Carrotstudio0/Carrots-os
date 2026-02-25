@@ -1,0 +1,3 @@
+#!/bin/bash
+# CarrotOS System Diagnostics
+echo "Running system diagnostics..."

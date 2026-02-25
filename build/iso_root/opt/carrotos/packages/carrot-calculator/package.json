@@ -1,0 +1,17 @@
+{
+  "name": "carrot-calculator",
+  "version": "1.0.0",
+  "size": 1835008,
+  "dependencies": [],
+  "installed": true,
+  "timestamp": "2026-02-25T04:09:42.731386",
+  "binaries": [
+    "bin\\carrot-calculator"
+  ],
+  "libraries": [
+    "lib\\libcarrotcalculator.so.1"
+  ],
+  "config_files": [
+    "calc.conf"
+  ]
+}

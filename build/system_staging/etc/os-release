@@ -1,0 +1,10 @@
+NAME="CarrotOS"
+VERSION="1.0"
+ID=carrotos
+ID_LIKE=linux
+PRETTY_NAME="CarrotOS 1.0"
+VERSION_ID=1.0
+HOME_URL="https://carrotos.local"
+DOCUMENTATION_URL="https://docs.carrotos.local"
+BUG_REPORT_URL="https://bugs.carrotos.local"
+LOGO=carrot

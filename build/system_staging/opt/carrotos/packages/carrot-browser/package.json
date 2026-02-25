@@ -1,0 +1,19 @@
+{
+  "name": "carrot-browser",
+  "version": "1.0.0",
+  "size": 24117248,
+  "dependencies": [],
+  "installed": true,
+  "timestamp": "2026-02-25T04:09:42.594381",
+  "binaries": [
+    "bin\\carrot-browser"
+  ],
+  "libraries": [
+    "lib\\libcarrotbrowser.so.1"
+  ],
+  "config_files": [
+    "browser.conf",
+    "proxy.conf",
+    "security.conf"
+  ]
+}

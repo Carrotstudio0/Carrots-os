@@ -1,0 +1,3 @@
+# /etc/inittab
+id:3:initdefault:
+ca::ctrlaltdel:/sbin/shutdown -t3 -r now

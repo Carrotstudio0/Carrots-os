@@ -1,0 +1,19 @@
+{
+  "name": "carrot-editor",
+  "version": "1.0.0",
+  "size": 6291456,
+  "dependencies": [],
+  "installed": true,
+  "timestamp": "2026-02-25T04:09:42.624583",
+  "binaries": [
+    "bin\\carrot-editor"
+  ],
+  "libraries": [
+    "lib\\libcarroteditor.so.1"
+  ],
+  "config_files": [
+    "editor.conf",
+    "themes.conf",
+    "plugins.conf"
+  ]
+}
