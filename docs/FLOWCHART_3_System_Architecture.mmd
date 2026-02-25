@@ -1,0 +1,149 @@
+graph TB
+    subgraph USER["👥 User Layer"]
+        A1["User Applications"]
+        A2["Web Browser"]
+        A3["Terminal"]
+        A4["File Manager"]
+        A5["Editor"]
+    end
+    
+    subgraph DESKTOP["🎨 Desktop Environment"]
+        B1["Carrot Shell<br/>shell.cpp"]
+        B2["Compositor"]
+        B3["Window Manager"]
+        B4["Theme Engine<br/>theme_engine.py"]
+        B5["Login Manager"]
+    end
+    
+    subgraph MANAGERS["🛠️ System Managers<br/>Python Layer"]
+        C1["Driver Manager<br/>driver_manager.py"]
+        C2["Update Manager<br/>update_manager.py"]
+        C3["User Manager<br/>user_manager.py"]
+        C4["Network Manager<br/>network_manager.py"]
+        C5["Power Manager<br/>power_manager.py"]
+        C6["Control Center<br/>carrot-control-center.py"]
+    end
+    
+    subgraph CONFIG["⚙️ Configuration Layer"]
+        D1["/etc/carrot-desktop.conf"]
+        D2["/etc/carrot-boot.conf"]
+        D3["/etc/carrot-update.conf"]
+        D4["/etc/carrot-driver.conf"]
+        D5["/etc/carrot-power.conf"]
+        D6["/etc/carrot-theme.conf"]
+        D7["/etc/carrot-users.conf"]
+        D8["/etc/carrot-network.conf"]
+    end
+    
+    subgraph SERVICES["🔧 System Services"]
+        E1["syslogd<br/>Logging"]
+        E2["networkd<br/>Network"]
+        E3["sshd<br/>SSH"]
+        E4["update-daemon<br/>Updates"]
+        E5["dbus<br/>IPC"]
+    end
+    
+    subgraph CORE["💻 Core System Layer"]
+        F1["Init Process<br/>init.c - PID 1"]
+        F2["Device Drivers"]
+        F3["Filesystem"]
+        F4["Process Management"]
+    end
+    
+    subgraph KERNEL["🔴 Kernel Layer"]
+        G1["Memory Management<br/>Paging, virtual memory"]
+        G2["Process Scheduler"]
+        G3["Interrupt Handlers<br/>IDT"]
+        G4["Page Tables<br/>GDT"]
+        G5["Device Drivers"]
+        G6["File System Cache"]
+    end
+    
+    subgraph BOOT["⚫ Boot Layer"]
+        H1["GRUB Bootloader<br/>boot/grub/"]
+        H2["Boot Code<br/>bootloader.c"]
+    end
+    
+    subgraph HARDWARE["🖥️ Hardware Layer"]
+        I1["CPU<br/>x86-64"]
+        I2["Memory"]
+        I3["Storage<br/>HDD/SSD"]
+        I4["Network"]
+        I5["GPU"]
+        I6["Peripherals"]
+    end
+    
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    A4 --> B1
+    A5 --> B1
+    
+    B1 --> B2
+    B1 --> B3
+    B1 --> B5
+    B1 --> B4
+    
+    B1 --> C1
+    B1 --> C2
+    B1 --> C3
+    B1 --> C4
+    B1 --> C5
+    B1 --> C6
+    
+    C1 --> D4
+    C2 --> D3
+    C3 --> D7
+    C4 --> D8
+    C5 --> D5
+    B4 --> D6
+    B1 --> D1
+    B5 --> D1
+    
+    C1 --> E2
+    C2 --> E4
+    C3 --> E1
+    C4 --> E2
+    C6 --> E5
+    
+    E1 --> F1
+    E2 --> F1
+    E4 --> F1
+    E5 --> F1
+    
+    F1 --> F2
+    F1 --> F3
+    F1 --> F4
+    
+    F2 --> G5
+    F3 --> G6
+    F4 --> G2
+    
+    G1 --> G4
+    G2 --> G3
+    G3 --> G4
+    G5 --> G6
+    
+    G1 --> H2
+    G5 --> H2
+    H2 --> H1
+    
+    H1 --> I1
+    H1 --> I2
+    
+    I1 --> G1
+    I2 --> G1
+    I3 --> G5
+    I4 --> G5
+    I5 --> G5
+    I6 --> G5
+    
+    style USER fill:#20B2AA,stroke:#333,stroke-width:2px,color:#fff
+    style DESKTOP fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style MANAGERS fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style CONFIG fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style SERVICES fill:#FF6B35,stroke:#333,stroke-width:2px,color:#fff
+    style CORE fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style KERNEL fill:#32CD32,stroke:#333,stroke-width:2px,color:#000
+    style BOOT fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style HARDWARE fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff

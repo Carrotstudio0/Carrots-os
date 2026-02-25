@@ -1,0 +1,151 @@
+graph TD
+    A[CarrotOS Development Environment] --> B{Target Phase}
+    
+    B -->|PHASE 1| C["📋 Project Planning"]
+    C --> C1["Architecture Design"]
+    C --> C2["Component Requirements"]
+    C --> C3["Dependencies Analysis"]
+    C1 --> D[Build Foundation]
+    C2 --> D
+    C3 --> D
+    
+    B -->|PHASE 2| D["🔨 Build System Setup"]
+    D --> D1["Makefile Creation"]
+    D --> D2["Compiler Configuration"]
+    D --> D3["Build Validator"]
+    D1 --> E[Component Development]
+    D2 --> E
+    D3 --> E
+    
+    B -->|PHASE 3| E["💻 Core Components Development"]
+    E --> E1["Bootloader<br/>bootloader.c"]
+    E --> E2["Kernel<br/>kernel.c"]
+    E --> E3["Init System<br/>init.c"]
+    E --> E4["Desktop Shell<br/>shell.cpp"]
+    E1 --> F[System Managers]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+    
+    B -->|PHASE 4| F["🛠️ System Managers<br/>Python Layer"]
+    F --> F1["Driver Manager<br/>driver_manager.py"]
+    F --> F2["Update Manager<br/>update_manager.py"]
+    F --> F3["User Manager<br/>user_manager.py"]
+    F --> F4["Network Manager<br/>network_manager.py"]
+    F --> F5["Power Manager<br/>power_manager.py"]
+    F --> F6["Theme Engine<br/>theme_engine.py"]
+    F1 --> G[Configuration System]
+    F2 --> G
+    F3 --> G
+    F4 --> G
+    F5 --> G
+    F6 --> G
+    
+    B -->|PHASE 5| G["⚙️ Configuration Files<br/>etc/carrot-*.conf"]
+    G --> G1["/etc/carrot-desktop.conf"]
+    G --> G2["/etc/carrot-boot.conf"]
+    G --> G3["/etc/carrot-update.conf"]
+    G --> G4["/etc/carrot-driver.conf"]
+    G --> G5["/etc/carrot-power.conf"]
+    G --> G6["/etc/carrot-theme.conf"]
+    G --> G7["/etc/carrot-users.conf"]
+    G --> G8["/etc/carrot-network.conf"]
+    G1 --> H[GUI Applications]
+    G2 --> H
+    G3 --> H
+    G4 --> H
+    G5 --> H
+    G6 --> H
+    G7 --> H
+    G8 --> H
+    
+    B -->|PHASE 6| H["🎨 GUI Applications"]
+    H --> H1["Control Center"]
+    H --> H2["Driver Manager GUI"]
+    H --> H3["Terminal"]
+    H --> H4["File Manager"]
+    H --> H5["Text Editor"]
+    H --> H6["Settings"]
+    H --> H7["Software Center"]
+    H1 --> I[System Installer]
+    H2 --> I
+    H3 --> I
+    H4 --> I
+    H5 --> I
+    H6 --> I
+    H7 --> I
+    
+    B -->|PHASE 7| I["📦 Installer System<br/>carrot-installer.py"]
+    I --> I1["Disk Management"]
+    I --> I2["Partitioning & Formatting"]
+    I --> I3["Package Installation"]
+    I --> I4["Configuration Setup"]
+    I1 --> J[Build & Testing]
+    I2 --> J
+    I3 --> J
+    I4 --> J
+    
+    B -->|PHASE 8| J["✅ Build & Validation"]
+    J --> J1["make validate"]
+    J --> J2["make build-python"]
+    J --> J3["make build-c"]
+    J --> J4["make build-cpp"]
+    J1 --> K[Create ISO]
+    J2 --> K
+    J3 --> K
+    J4 --> K
+    
+    B -->|PHASE 9| K["💿 ISO Image Creation<br/>carrotos-1.0-x86_64.iso"]
+    K --> L[Distribution]
+    
+    B -->|PHASE 10| L["📥 Distribution & Installation"]
+    L --> L1["Boot from ISO"]
+    L --> L2["Run Installer"]
+    L --> L3["Configure System"]
+    L1 --> M[Runtime System]
+    L2 --> M
+    L3 --> M
+    
+    B -->|PHASE 11| M["🚀 Runtime System"]
+    M --> M1["Boot Sequence<br/>GRUB → Kernel → Init"]
+    M --> M2["Service Startup<br/>Runlevel 3 or 5"]
+    M --> M3["Desktop Environment<br/>Carrot Shell"]
+    M --> M4["User Applications"]
+    M1 --> N{System Management}
+    M2 --> N
+    M3 --> N
+    M4 --> N
+    
+    N --> N1["🔄 Driver Auto-Detection"]
+    N --> N2["📡 Network Configuration"]
+    N --> N3["⚡ Power Management"]
+    N --> N4["🎨 Theme Management"]
+    N --> N5["👤 User Management"]
+    N --> N6["🔐 Security & Firewall"]
+    N --> N7["📦 System Updates<br/>with Rollback"]
+    
+    N1 --> O[Monitoring & Maintenance]
+    N2 --> O
+    N3 --> O
+    N4 --> O
+    N5 --> O
+    N6 --> O
+    N7 --> O
+    
+    O --> P["✨ CarrotOS Running System<br/>v1.0 Complete & Functional"]
+    
+    style A fill:#FF6B35,stroke:#333,stroke-width:3px,color:#fff
+    style C fill:#04A777,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style H fill:#20B2AA,stroke:#333,stroke-width:2px,color:#fff
+    style I fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#FF4500,stroke:#333,stroke-width:2px,color:#fff
+    style K fill:#32CD32,stroke:#333,stroke-width:2px,color:#fff
+    style L fill:#1E90FF,stroke:#333,stroke-width:2px,color:#fff
+    style M fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff
+    style N fill:#FF1493,stroke:#333,stroke-width:2px,color:#fff
+    style O fill:#00CED1,stroke:#333,stroke-width:2px,color:#fff
+    style P fill:#FF6B35,stroke:#333,stroke-width:3px,color:#fff

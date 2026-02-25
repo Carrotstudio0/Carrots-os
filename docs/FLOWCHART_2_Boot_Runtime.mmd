@@ -1,0 +1,122 @@
+graph TD
+    A["⚡ System Startup"] --> B["GRUB Bootloader"]
+    B --> C["Load Kernel"]
+    C --> D["kernel_main()<br/>Memory Setup"]
+    D --> E["Enable Paging<br/>Setup GDT/IDT"]
+    E --> F["Initialize Devices<br/>PCI Scan"]
+    F --> G["Start Init Process<br/>PID 1"]
+    
+    G --> H{"Runlevel<br/>Selection"}
+    H -->|Runlevel 3| I["Multi-User Mode<br/>with Network"]
+    H -->|Runlevel 5| J["Graphical Mode<br/>with Desktop"]
+    
+    I --> K["Mount Filesystems<br/>proc, sys, dev, run"]
+    J --> K
+    
+    K --> L["Start Core Daemons"]
+    L --> L1["syslogd<br/>System Logging"]
+    L --> L2["networkd<br/>Network Management"]
+    L --> L3["sshd<br/>SSH Access"]
+    L --> L4["update-daemon<br/>System Updates"]
+    
+    L1 --> M{Runlevel 5?}
+    L2 --> M
+    L3 --> M
+    L4 --> M
+    
+    M -->|Yes| N["Start Desktop<br/>Environment"]
+    N --> N1["Initialize Carrot Shell"]
+    N1 --> N2["Load Theme Engine"]
+    N2 --> N3["Start Compositor"]
+    N3 --> N4["Show Login Manager"]
+    
+    M -->|No| O["Show Console Login"]
+    
+    N4 --> P["👤 User Authentication"]
+    O --> P
+    
+    P --> Q{"Login<br/>Successful?"}
+    Q -->|Yes| R["Create User Session"]
+    Q -->|No| P
+    
+    R --> S["Load Desktop<br/>Configurations"]
+    S --> S1["/etc/carrot-desktop.conf"]
+    S --> S2["/etc/carrot-theme.conf"]
+    S --> S3["/etc/carrot-power.conf"]
+    S --> S4["/etc/carrot-network.conf"]
+    
+    S1 --> T["Initialize System<br/>Managers"]
+    S2 --> T
+    S3 --> T
+    S4 --> T
+    
+    T --> T1["🔄 Driver Manager<br/>Auto-Detect Hardware"]
+    T --> T2["📡 Network Manager<br/>Configure Network"]
+    T --> T3["⚡ Power Manager<br/>Set Power Profile"]
+    T --> T4["🎨 Theme Manager<br/>Apply Theme"]
+    T --> T5["👤 User Manager<br/>Load User Config"]
+    T --> T6["📦 Update Manager<br/>Check Updates"]
+    
+    T1 --> U["🎨 Desktop Ready"]
+    T2 --> U
+    T3 --> U
+    T4 --> U
+    T5 --> U
+    T6 --> U
+    
+    U --> V["Launch User Applications"]
+    V --> V1["File Manager"]
+    V --> V2["Terminal"]
+    V --> V3["Text Editor"]
+    V --> V4["Web Browser"]
+    V --> V5["Other Apps"]
+    
+    V1 --> W["✨ User Workspace<br/>Fully Operational"]
+    V2 --> W
+    V3 --> W
+    V4 --> W
+    V5 --> W
+    
+    W --> X{User Action}
+    X -->|Run App| V
+    X -->|System Update| Y["📦 Update Manager<br/>Download & Install"]
+    X -->|Power Save| Z["⚡ Power Profile<br/>Change to Powersave"]
+    X -->|Theme Change| AA["🎨 Theme Engine<br/>Apply New Theme"]
+    X -->|Network Config| AB["📡 Network Manager<br/>Reconfigure Network"]
+    X -->|Logout| AC["End User Session"]
+    X -->|Shutdown| AD["System Shutdown"]
+    
+    Y --> W
+    Z --> W
+    AA --> W
+    AB --> W
+    
+    AC --> AE["Stop Desktop<br/>Environment"]
+    AD --> AE
+    
+    AE --> AF["Stop System<br/>Daemons"]
+    AF --> AG["Unmount Filesystems"]
+    AG --> AH["Halt System"]
+    
+    style A fill:#FF6B35,stroke:#333,stroke-width:2px,color:#fff
+    style B fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style C fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style I fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style J fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style N fill:#20B2AA,stroke:#333,stroke-width:2px,color:#fff
+    style O fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style P fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style R fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style U fill:#32CD32,stroke:#333,stroke-width:2px,color:#fff
+    style W fill:#00CED1,stroke:#333,stroke-width:2px,color:#fff
+    style T1 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T2 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T3 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T4 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T5 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T6 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style AH fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff

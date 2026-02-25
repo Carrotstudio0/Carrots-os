@@ -1,0 +1,133 @@
+graph LR
+    subgraph BUILD["🔨 BUILD PHASE"]
+        B1["Makefile"]
+        B2["Python Compiler"]
+        B3["C Compiler gcc"]
+        B4["C++ Compiler g++"]
+    end
+    
+    subgraph COMPONENTS["📦 COMPONENTS BUILT"]
+        C1["bootloader.c<br/>100+ lines"]
+        C2["kernel.c<br/>400+ lines"]
+        C3["init.c<br/>400+ lines"]
+        C4["shell.cpp<br/>300+ lines"]
+        C5["Managers<br/>2000+ lines"]
+        C6["Config Files<br/>500+ lines"]
+    end
+    
+    subgraph PACKAGE["📀 PACKAGE"]
+        P1["Build System<br/>Makefile"]
+        P2["Build Validator"]
+        P3["ISO Builder"]
+        P4["carrotos-1.0-x86_64.iso"]
+    end
+    
+    subgraph INSTALL["💾 INSTALLATION"]
+        I1["Bootloader Installer"]
+        I2["Partition Manager"]
+        I3["Package Installer"]
+        I4["Config Copier"]
+        I5["System Ready"]
+    end
+    
+    subgraph RUNTIME["🚀 RUNTIME"]
+        R1["⚡ Boot"]
+        R2["🔄 Driver Detection"]
+        R3["📡 Network Setup"]
+        R4["⚡ Power Profile"]
+        R5["🎨 Theme"]
+        R6["👤 User Session"]
+    end
+    
+    subgraph MANAGEMENT["🛠️ SYSTEM MANAGEMENT"]
+        M1["Driver Manager<br/>Hardware Detect"]
+        M2["Update Manager<br/>Snapshot/Rollback"]
+        M3["User Manager<br/>Admin Users"]
+        M4["Network Manager<br/>Configure Network"]
+        M5["Power Manager<br/>Performance"]
+        M6["Theme Engine<br/>Appearance"]
+    end
+    
+    subgraph CONFIG["⚙️ CONFIGURATION"]
+        CFG1["/etc/carrot-*.conf<br/>9 Config Files"]
+        CFG2["User Settings<br/>~/.config/"]
+        CFG3["System State<br/>/var/lib/"]
+    end
+    
+    subgraph OUTPUT["✨ SYSTEM OUTPUT"]
+        O1["User Apps Running"]
+        O2["Desktop Responsive"]
+        O3["All Services OK"]
+        O4["Perfect Experience"]
+    end
+    
+    B1 --> B2
+    B1 --> B3
+    B1 --> B4
+    
+    B2 --> C5
+    B3 --> C1
+    B3 --> C2
+    B3 --> C3
+    B4 --> C4
+    
+    C1 --> P1
+    C2 --> P1
+    C3 --> P1
+    C4 --> P1
+    C5 --> P1
+    C6 --> P1
+    
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+    
+    P4 --> I1
+    I1 --> I2
+    I2 --> I3
+    I3 --> I4
+    I4 --> I5
+    
+    I5 --> R1
+    R1 --> R2
+    R2 --> R3
+    R3 --> R4
+    R4 --> R5
+    R5 --> R6
+    
+    R2 --> M1
+    R3 --> M4
+    R4 --> M5
+    R5 --> M6
+    C5 --> M2
+    C5 --> M3
+    
+    M1 --> CFG1
+    M2 --> CFG1
+    M3 --> CFG1
+    M4 --> CFG1
+    M5 --> CFG1
+    M6 --> CFG1
+    
+    CFG1 --> CFG2
+    CFG2 --> CFG3
+    
+    M1 --> O1
+    M2 --> O2
+    M3 --> O3
+    M4 --> O3
+    M5 --> O3
+    M6 --> O3
+    
+    O1 --> O4
+    O2 --> O4
+    O3 --> O4
+    
+    style BUILD fill:#F7931E,stroke:#333,stroke-width:2px,color:#000
+    style COMPONENTS fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style PACKAGE fill:#32CD32,stroke:#333,stroke-width:2px,color:#000
+    style INSTALL fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style RUNTIME fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff
+    style MANAGEMENT fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style CONFIG fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style OUTPUT fill:#00CED1,stroke:#333,stroke-width:2px,color:#fff

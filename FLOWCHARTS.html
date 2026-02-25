@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarrotOS - رسوم بيانية شاملة | Complete Flowcharts</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            color: #FF6B35;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .flowchart-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flowchart-section h2 {
+            color: #FF6B35;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #FF6B35;
+        }
+        
+        .flowchart-section p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+        
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .save-instructions {
+            background: #e8f4f8;
+            border-left: 4px solid #04A777;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .save-instructions h4 {
+            color: #04A777;
+            margin-bottom: 10px;
+        }
+        
+        .save-instructions ol {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .save-instructions li {
+            margin-bottom: 8px;
+        }
+        
+        footer {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #666;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #FF6B35;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        
+        .download-btn:hover {
+            background: #E55A1F;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .flowchart-section {
+                padding: 15px;
+            }
+            
+            .mermaid {
+                overflow-x: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 CarrotOS Complete Flowcharts</h1>
+            <p>رسوم بيانية شاملة لمشروع CarrotOS | Complete Visual Diagrams</p>
+        </header>
+        
+        <!-- Flowchart 1: Project Workflow -->
+        <div class="flowchart-section">
+            <h2>📊 Flowchart 1: Complete Project Development Workflow</h2>
+            <p>يوضح جميع مراحل تطوير المشروع من البداية إلى النهاية - 11 مرحلة متسلسلة</p>
+            <p>Shows all 11 phases of project development from initial planning to complete system deployment</p>
+            
+            <div class="mermaid">
+graph TD
+    A[CarrotOS Development Environment] --> B{Target Phase}
+    
+    B -->|PHASE 1| C["📋 Project Planning"]
+    C --> C1["Architecture Design"]
+    C --> C2["Component Requirements"]
+    C --> C3["Dependencies Analysis"]
+    C1 --> D[Build Foundation]
+    C2 --> D
+    C3 --> D
+    
+    B -->|PHASE 2| D["🔨 Build System Setup"]
+    D --> D1["Makefile Creation"]
+    D --> D2["Compiler Configuration"]
+    D --> D3["Build Validator"]
+    D1 --> E[Component Development]
+    D2 --> E
+    D3 --> E
+    
+    B -->|PHASE 3| E["💻 Core Components Development"]
+    E --> E1["Bootloader<br/>bootloader.c"]
+    E --> E2["Kernel<br/>kernel.c"]
+    E --> E3["Init System<br/>init.c"]
+    E --> E4["Desktop Shell<br/>shell.cpp"]
+    E1 --> F[System Managers]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+    
+    B -->|PHASE 4| F["🛠️ System Managers<br/>Python Layer"]
+    F --> F1["Driver Manager<br/>driver_manager.py"]
+    F --> F2["Update Manager<br/>update_manager.py"]
+    F --> F3["User Manager<br/>user_manager.py"]
+    F --> F4["Network Manager<br/>network_manager.py"]
+    F --> F5["Power Manager<br/>power_manager.py"]
+    F --> F6["Theme Engine<br/>theme_engine.py"]
+    F1 --> G[Configuration System]
+    F2 --> G
+    F3 --> G
+    F4 --> G
+    F5 --> G
+    F6 --> G
+    
+    B -->|PHASE 5| G["⚙️ Configuration Files<br/>etc/carrot-*.conf"]
+    G --> G1["/etc/carrot-desktop.conf"]
+    G --> G2["/etc/carrot-boot.conf"]
+    G --> G3["/etc/carrot-update.conf"]
+    G --> G4["/etc/carrot-driver.conf"]
+    G --> G5["/etc/carrot-power.conf"]
+    G --> G6["/etc/carrot-theme.conf"]
+    G --> G7["/etc/carrot-users.conf"]
+    G --> G8["/etc/carrot-network.conf"]
+    G1 --> H[GUI Applications]
+    G2 --> H
+    G3 --> H
+    G4 --> H
+    G5 --> H
+    G6 --> H
+    G7 --> H
+    G8 --> H
+    
+    B -->|PHASE 6| H["🎨 GUI Applications"]
+    H --> H1["Control Center"]
+    H --> H2["Driver Manager GUI"]
+    H --> H3["Terminal"]
+    H --> H4["File Manager"]
+    H --> H5["Text Editor"]
+    H --> H6["Settings"]
+    H --> H7["Software Center"]
+    H1 --> I[System Installer]
+    H2 --> I
+    H3 --> I
+    H4 --> I
+    H5 --> I
+    H6 --> I
+    H7 --> I
+    
+    B -->|PHASE 7| I["📦 Installer System<br/>carrot-installer.py"]
+    I --> I1["Disk Management"]
+    I --> I2["Partitioning & Formatting"]
+    I --> I3["Package Installation"]
+    I --> I4["Configuration Setup"]
+    I1 --> J[Build & Testing]
+    I2 --> J
+    I3 --> J
+    I4 --> J
+    
+    B -->|PHASE 8| J["✅ Build & Validation"]
+    J --> J1["make validate"]
+    J --> J2["make build-python"]
+    J --> J3["make build-c"]
+    J --> J4["make build-cpp"]
+    J1 --> K[Create ISO]
+    J2 --> K
+    J3 --> K
+    J4 --> K
+    
+    B -->|PHASE 9| K["💿 ISO Image Creation<br/>carrotos-1.0-x86_64.iso"]
+    K --> L[Distribution]
+    
+    B -->|PHASE 10| L["📥 Distribution & Installation"]
+    L --> L1["Boot from ISO"]
+    L --> L2["Run Installer"]
+    L --> L3["Configure System"]
+    L1 --> M[Runtime System]
+    L2 --> M
+    L3 --> M
+    
+    B -->|PHASE 11| M["🚀 Runtime System"]
+    M --> M1["Boot Sequence<br/>GRUB → Kernel → Init"]
+    M --> M2["Service Startup<br/>Runlevel 3 or 5"]
+    M --> M3["Desktop Environment<br/>Carrot Shell"]
+    M --> M4["User Applications"]
+    M1 --> N{System Management}
+    M2 --> N
+    M3 --> N
+    M4 --> N
+    
+    N --> N1["🔄 Driver Auto-Detection"]
+    N --> N2["📡 Network Configuration"]
+    N --> N3["⚡ Power Management"]
+    N --> N4["🎨 Theme Management"]
+    N --> N5["👤 User Management"]
+    N --> N6["🔐 Security & Firewall"]
+    N --> N7["📦 System Updates<br/>with Rollback"]
+    
+    N1 --> O[Monitoring & Maintenance]
+    N2 --> O
+    N3 --> O
+    N4 --> O
+    N5 --> O
+    N6 --> O
+    N7 --> O
+    
+    O --> P["✨ CarrotOS Running System<br/>v1.0 Complete & Functional"]
+    
+    style A fill:#FF6B35,stroke:#333,stroke-width:3px,color:#fff
+    style C fill:#04A777,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style H fill:#20B2AA,stroke:#333,stroke-width:2px,color:#fff
+    style I fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#FF4500,stroke:#333,stroke-width:2px,color:#fff
+    style K fill:#32CD32,stroke:#333,stroke-width:2px,color:#fff
+    style L fill:#1E90FF,stroke:#333,stroke-width:2px,color:#fff
+    style M fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff
+    style N fill:#FF1493,stroke:#333,stroke-width:2px,color:#fff
+    style O fill:#00CED1,stroke:#333,stroke-width:2px,color:#fff
+    style P fill:#FF6B35,stroke:#333,stroke-width:3px,color:#fff
+            </div>
+            
+            <div class="save-instructions">
+                <h4>💾 طريقة الحفظ | How to Save:</h4>
+                <ol>
+                    <li>انقر بزر الماوس الأيمن على الرسم البياني | Right-click on the diagram</li>
+                    <li>اختر "Save image as..." | Select "Save image as..."</li>
+                    <li>احفظ باسم: carrotos-project-workflow.png</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Flowchart 2: Boot and Runtime -->
+        <div class="flowchart-section">
+            <h2>⚡ Flowchart 2: Boot and Runtime System Flow</h2>
+            <p>يوضح عملية الإقلاع الكاملة من GRUB إلى سطح المكتب - Complete boot sequence</p>
+            <p>Shows complete boot process from GRUB bootloader to running desktop with system managers</p>
+            
+            <div class="mermaid">
+graph TD
+    A["⚡ System Startup"] --> B["GRUB Bootloader"]
+    B --> C["Load Kernel"]
+    C --> D["kernel_main()<br/>Memory Setup"]
+    D --> E["Enable Paging<br/>Setup GDT/IDT"]
+    E --> F["Initialize Devices<br/>PCI Scan"]
+    F --> G["Start Init Process<br/>PID 1"]
+    
+    G --> H{"Runlevel<br/>Selection"}
+    H -->|Runlevel 3| I["Multi-User Mode<br/>with Network"]
+    H -->|Runlevel 5| J["Graphical Mode<br/>with Desktop"]
+    
+    I --> K["Mount Filesystems<br/>proc, sys, dev, run"]
+    J --> K
+    
+    K --> L["Start Core Daemons"]
+    L --> L1["syslogd<br/>System Logging"]
+    L --> L2["networkd<br/>Network Management"]
+    L --> L3["sshd<br/>SSH Access"]
+    L --> L4["update-daemon<br/>System Updates"]
+    
+    L1 --> M{Runlevel 5?}
+    L2 --> M
+    L3 --> M
+    L4 --> M
+    
+    M -->|Yes| N["Start Desktop<br/>Environment"]
+    N --> N1["Initialize Carrot Shell"]
+    N1 --> N2["Load Theme Engine"]
+    N2 --> N3["Start Compositor"]
+    N3 --> N4["Show Login Manager"]
+    
+    M -->|No| O["Show Console Login"]
+    
+    N4 --> P["👤 User Authentication"]
+    O --> P
+    
+    P --> Q{"Login<br/>Successful?"}
+    Q -->|Yes| R["Create User Session"]
+    Q -->|No| P
+    
+    R --> S["Load Desktop<br/>Configurations"]
+    S --> S1["/etc/carrot-desktop.conf"]
+    S --> S2["/etc/carrot-theme.conf"]
+    S --> S3["/etc/carrot-power.conf"]
+    S --> S4["/etc/carrot-network.conf"]
+    
+    S1 --> T["Initialize System<br/>Managers"]
+    S2 --> T
+    S3 --> T
+    S4 --> T
+    
+    T --> T1["🔄 Driver Manager<br/>Auto-Detect Hardware"]
+    T --> T2["📡 Network Manager<br/>Configure Network"]
+    T --> T3["⚡ Power Manager<br/>Set Power Profile"]
+    T --> T4["🎨 Theme Manager<br/>Apply Theme"]
+    T --> T5["👤 User Manager<br/>Load User Config"]
+    T --> T6["📦 Update Manager<br/>Check Updates"]
+    
+    T1 --> U["🎨 Desktop Ready"]
+    T2 --> U
+    T3 --> U
+    T4 --> U
+    T5 --> U
+    T6 --> U
+    
+    U --> V["Launch User Applications"]
+    V --> V1["File Manager"]
+    V --> V2["Terminal"]
+    V --> V3["Text Editor"]
+    V --> V4["Web Browser"]
+    V --> V5["Other Apps"]
+    
+    V1 --> W["✨ User Workspace<br/>Fully Operational"]
+    V2 --> W
+    V3 --> W
+    V4 --> W
+    V5 --> W
+    
+    W --> X{User Action}
+    X -->|Run App| V
+    X -->|System Update| Y["📦 Update Manager<br/>Download & Install"]
+    X -->|Power Save| Z["⚡ Power Profile<br/>Change to Powersave"]
+    X -->|Theme Change| AA["🎨 Theme Engine<br/>Apply New Theme"]
+    X -->|Network Config| AB["📡 Network Manager<br/>Reconfigure Network"]
+    X -->|Logout| AC["End User Session"]
+    X -->|Shutdown| AD["System Shutdown"]
+    
+    Y --> W
+    Z --> W
+    AA --> W
+    AB --> W
+    
+    AC --> AE["Stop Desktop<br/>Environment"]
+    AD --> AE
+    
+    AE --> AF["Stop System<br/>Daemons"]
+    AF --> AG["Unmount Filesystems"]
+    AG --> AH["Halt System"]
+    
+    style A fill:#FF6B35,stroke:#333,stroke-width:2px,color:#fff
+    style B fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style C fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style I fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style J fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style N fill:#20B2AA,stroke:#333,stroke-width:2px,color:#fff
+    style O fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style P fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style R fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style U fill:#32CD32,stroke:#333,stroke-width:2px,color:#fff
+    style W fill:#00CED1,stroke:#333,stroke-width:2px,color:#fff
+    style T1 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T2 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T3 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T4 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T5 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style T6 fill:#7B68EE,stroke:#333,stroke-width:1px,color:#fff
+    style AH fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff
+            </div>
+            
+            <div class="save-instructions">
+                <h4>💾 طريقة الحفظ | How to Save:</h4>
+                <ol>
+                    <li>Right-click on the diagram</li>
+                    <li>Select "Save image as..."</li>
+                    <li>Save as: carrotos-boot-runtime-flow.png</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Flowchart 3: System Architecture -->
+        <div class="flowchart-section">
+            <h2>🏗️ Flowchart 3: Complete System Architecture</h2>
+            <p>يوضح الهيكل المعماري الكامل من مستوى المستخدم إلى الأجهزة</p>
+            <p>Shows complete system layering from user applications to hardware</p>
+            
+            <div class="mermaid">
+graph TB
+    subgraph USER["👥 User Layer"]
+        A1["User Applications"]
+        A2["Web Browser"]
+        A3["Terminal"]
+        A4["File Manager"]
+        A5["Editor"]
+    end
+    
+    subgraph DESKTOP["🎨 Desktop Environment"]
+        B1["Carrot Shell<br/>shell.cpp"]
+        B2["Compositor"]
+        B3["Window Manager"]
+        B4["Theme Engine<br/>theme_engine.py"]
+        B5["Login Manager"]
+    end
+    
+    subgraph MANAGERS["🛠️ System Managers<br/>Python Layer"]
+        C1["Driver Manager<br/>driver_manager.py"]
+        C2["Update Manager<br/>update_manager.py"]
+        C3["User Manager<br/>user_manager.py"]
+        C4["Network Manager<br/>network_manager.py"]
+        C5["Power Manager<br/>power_manager.py"]
+        C6["Control Center<br/>carrot-control-center.py"]
+    end
+    
+    subgraph CONFIG["⚙️ Configuration Layer"]
+        D1["/etc/carrot-desktop.conf"]
+        D2["/etc/carrot-boot.conf"]
+        D3["/etc/carrot-update.conf"]
+        D4["/etc/carrot-driver.conf"]
+        D5["/etc/carrot-power.conf"]
+        D6["/etc/carrot-theme.conf"]
+        D7["/etc/carrot-users.conf"]
+        D8["/etc/carrot-network.conf"]
+    end
+    
+    subgraph SERVICES["🔧 System Services"]
+        E1["syslogd<br/>Logging"]
+        E2["networkd<br/>Network"]
+        E3["sshd<br/>SSH"]
+        E4["update-daemon<br/>Updates"]
+        E5["dbus<br/>IPC"]
+    end
+    
+    subgraph CORE["💻 Core System Layer"]
+        F1["Init Process<br/>init.c - PID 1"]
+        F2["Device Drivers"]
+        F3["Filesystem"]
+        F4["Process Management"]
+    end
+    
+    subgraph KERNEL["🔴 Kernel Layer"]
+        G1["Memory Management<br/>Paging, virtual memory"]
+        G2["Process Scheduler"]
+        G3["Interrupt Handlers<br/>IDT"]
+        G4["Page Tables<br/>GDT"]
+        G5["Device Drivers"]
+        G6["File System Cache"]
+    end
+    
+    subgraph BOOT["⚫ Boot Layer"]
+        H1["GRUB Bootloader<br/>boot/grub/"]
+        H2["Boot Code<br/>bootloader.c"]
+    end
+    
+    subgraph HARDWARE["🖥️ Hardware Layer"]
+        I1["CPU<br/>x86-64"]
+        I2["Memory"]
+        I3["Storage<br/>HDD/SSD"]
+        I4["Network"]
+        I5["GPU"]
+        I6["Peripherals"]
+    end
+    
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    A4 --> B1
+    A5 --> B1
+    
+    B1 --> B2
+    B1 --> B3
+    B1 --> B5
+    B1 --> B4
+    
+    B1 --> C1
+    B1 --> C2
+    B1 --> C3
+    B1 --> C4
+    B1 --> C5
+    B1 --> C6
+    
+    C1 --> D4
+    C2 --> D3
+    C3 --> D7
+    C4 --> D8
+    C5 --> D5
+    B4 --> D6
+    B1 --> D1
+    B5 --> D1
+    
+    C1 --> E2
+    C2 --> E4
+    C3 --> E1
+    C4 --> E2
+    C6 --> E5
+    
+    E1 --> F1
+    E2 --> F1
+    E4 --> F1
+    E5 --> F1
+    
+    F1 --> F2
+    F1 --> F3
+    F1 --> F4
+    
+    F2 --> G5
+    F3 --> G6
+    F4 --> G2
+    
+    G1 --> G4
+    G2 --> G3
+    G3 --> G4
+    G5 --> G6
+    
+    G1 --> H2
+    G5 --> H2
+    H2 --> H1
+    
+    H1 --> I1
+    H1 --> I2
+    
+    I1 --> G1
+    I2 --> G1
+    I3 --> G5
+    I4 --> G5
+    I5 --> G5
+    I6 --> G5
+    
+    style USER fill:#20B2AA,stroke:#333,stroke-width:2px,color:#fff
+    style DESKTOP fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style MANAGERS fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style CONFIG fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style SERVICES fill:#FF6B35,stroke:#333,stroke-width:2px,color:#fff
+    style CORE fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style KERNEL fill:#32CD32,stroke:#333,stroke-width:2px,color:#000
+    style BOOT fill:#F7931E,stroke:#333,stroke-width:2px,color:#fff
+    style HARDWARE fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff
+            </div>
+            
+            <div class="save-instructions">
+                <h4>💾 طريقة الحفظ | How to Save:</h4>
+                <ol>
+                    <li>Right-click on the diagram</li>
+                    <li>Select "Save image as..."</li>
+                    <li>Save as: carrotos-system-architecture.png</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Flowchart 4: Build to Runtime -->
+        <div class="flowchart-section">
+            <h2>📦 Flowchart 4: Complete Build to Runtime Flow</h2>
+            <p>يوضح المسار الكامل من البناء إلى التشغيل - From compilation to production system</p>
+            <p>Shows entire pipeline from source code compilation to running system with management</p>
+            
+            <div class="mermaid">
+graph LR
+    subgraph BUILD["🔨 BUILD PHASE"]
+        B1["Makefile"]
+        B2["Python Compiler"]
+        B3["C Compiler gcc"]
+        B4["C++ Compiler g++"]
+    end
+    
+    subgraph COMPONENTS["📦 COMPONENTS BUILT"]
+        C1["bootloader.c<br/>100+ lines"]
+        C2["kernel.c<br/>400+ lines"]
+        C3["init.c<br/>400+ lines"]
+        C4["shell.cpp<br/>300+ lines"]
+        C5["Managers<br/>2000+ lines"]
+        C6["Config Files<br/>500+ lines"]
+    end
+    
+    subgraph PACKAGE["📀 PACKAGE"]
+        P1["Build System<br/>Makefile"]
+        P2["Build Validator"]
+        P3["ISO Builder"]
+        P4["carrotos-1.0-x86_64.iso"]
+    end
+    
+    subgraph INSTALL["💾 INSTALLATION"]
+        I1["Bootloader Installer"]
+        I2["Partition Manager"]
+        I3["Package Installer"]
+        I4["Config Copier"]
+        I5["System Ready"]
+    end
+    
+    subgraph RUNTIME["🚀 RUNTIME"]
+        R1["⚡ Boot"]
+        R2["🔄 Driver Detection"]
+        R3["📡 Network Setup"]
+        R4["⚡ Power Profile"]
+        R5["🎨 Theme"]
+        R6["👤 User Session"]
+    end
+    
+    subgraph MANAGEMENT["🛠️ SYSTEM MANAGEMENT"]
+        M1["Driver Manager<br/>Hardware Detect"]
+        M2["Update Manager<br/>Snapshot/Rollback"]
+        M3["User Manager<br/>Admin Users"]
+        M4["Network Manager<br/>Configure Network"]
+        M5["Power Manager<br/>Performance"]
+        M6["Theme Engine<br/>Appearance"]
+    end
+    
+    subgraph CONFIG["⚙️ CONFIGURATION"]
+        CFG1["/etc/carrot-*.conf<br/>9 Config Files"]
+        CFG2["User Settings<br/>~/.config/"]
+        CFG3["System State<br/>/var/lib/"]
+    end
+    
+    subgraph OUTPUT["✨ SYSTEM OUTPUT"]
+        O1["User Apps Running"]
+        O2["Desktop Responsive"]
+        O3["All Services OK"]
+        O4["Perfect Experience"]
+    end
+    
+    B1 --> B2
+    B1 --> B3
+    B1 --> B4
+    
+    B2 --> C5
+    B3 --> C1
+    B3 --> C2
+    B3 --> C3
+    B4 --> C4
+    
+    C1 --> P1
+    C2 --> P1
+    C3 --> P1
+    C4 --> P1
+    C5 --> P1
+    C6 --> P1
+    
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+    
+    P4 --> I1
+    I1 --> I2
+    I2 --> I3
+    I3 --> I4
+    I4 --> I5
+    
+    I5 --> R1
+    R1 --> R2
+    R2 --> R3
+    R3 --> R4
+    R4 --> R5
+    R5 --> R6
+    
+    R2 --> M1
+    R3 --> M4
+    R4 --> M5
+    R5 --> M6
+    C5 --> M2
+    C5 --> M3
+    
+    M1 --> CFG1
+    M2 --> CFG1
+    M3 --> CFG1
+    M4 --> CFG1
+    M5 --> CFG1
+    M6 --> CFG1
+    
+    CFG1 --> CFG2
+    CFG2 --> CFG3
+    
+    M1 --> O1
+    M2 --> O2
+    M3 --> O3
+    M4 --> O3
+    M5 --> O3
+    M6 --> O3
+    
+    O1 --> O4
+    O2 --> O4
+    O3 --> O4
+    
+    style BUILD fill:#F7931E,stroke:#333,stroke-width:2px,color:#000
+    style COMPONENTS fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
+    style PACKAGE fill:#32CD32,stroke:#333,stroke-width:2px,color:#000
+    style INSTALL fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style RUNTIME fill:#DC143C,stroke:#333,stroke-width:2px,color:#fff
+    style MANAGEMENT fill:#7B68EE,stroke:#333,stroke-width:2px,color:#fff
+    style CONFIG fill:#FF69B4,stroke:#333,stroke-width:2px,color:#fff
+    style OUTPUT fill:#00CED1,stroke:#333,stroke-width:2px,color:#fff
+            </div>
+            
+            <div class="save-instructions">
+                <h4>💾 طريقة الحفظ | How to Save:</h4>
+                <ol>
+                    <li>Right-click on the diagram</li>
+                    <li>Select "Save image as..."</li>
+                    <li>Save as: carrotos-build-runtime-flow.png</li>
+                </ol>
+            </div>
+        </div>
+        
+        <footer>
+            <h3>📥 كيفية استخدام هذا الملف | How to Use This File</h3>
+            <p>
+                يمكنك فتح هذا الملف في أي متصفح ويب (Chrome, Firefox, Edge, Safari)<br>
+                You can open this file in any web browser (Chrome, Firefox, Edge, Safari)
+            </p>
+            <p>
+                <strong>لحفظ الرسوم البيانية كصور:</strong><br>
+                To save the diagrams as images:
+            </p>
+            <ol style="text-align: right; display: inline-block;">
+                <li>انقر بزر الماوس الأيمن على أي رسم بياني | Right-click on any diagram</li>
+                <li>اختر "Save image as..." | Choose "Save image as..."</li>
+                <li>حدد المجلد والاسم | Select folder and name</li>
+                <li>سيتم حفظها كملفات PNG | Will be saved as PNG files</li>
+            </ol>
+            <hr style="margin: 20px 0;">
+            <p>
+                <strong>CarrotOS v1.0 | جميع الحقوق محفوظة © 2024</strong><br>
+                GPL v3 License
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>
