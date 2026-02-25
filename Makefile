@@ -18,12 +18,13 @@
 # ============ Build Configuration ============
 PROJECT_NAME    := CarrotOS
 PROJECT_VERSION := 1.0
-BUILD_DIR       := build
+BUILD_DIR       := build-artifacts/build
 OUTPUT_DIR      := $(BUILD_DIR)/output
 TOOLS_DIR       := tools
-CORE_DIR        := core
-KERNEL_DIR      := kernel
-DOCS_DIR        := docs
+SRC_DIR         := src
+KERNEL_DIR      := $(SRC_DIR)/kernel
+CORE_DIR        := $(SRC_DIR)/core
+BOOT_DIR        := $(SRC_DIR)/boot
 
 # ============ Compiler Configuration ============
 # C Compiler
@@ -98,12 +99,12 @@ all: validate build-c build-cpp build-python
 # ============ Validation ============
 validate:
 	@echo "$(BLUE)[BUILD] Validating project structure...$(NC)"
-	@if [ ! -d "$(CORE_DIR)" ]; then \
-		echo "$(RED)✗ Missing directory: $(CORE_DIR)$(NC)"; \
+	@if [ ! -d "$(SRC_DIR)/core" ]; then \
+		echo "$(RED)✗ Missing directory: $(SRC_DIR)/core$(NC)"; \
 		exit 1; \
 	fi
-	@if [ ! -d "$(KERNEL_DIR)" ]; then \
-		echo "$(RED)✗ Missing directory: $(KERNEL_DIR)$(NC)"; \
+	@if [ ! -d "$(SRC_DIR)/kernel" ]; then \
+		echo "$(RED)✗ Missing directory: $(SRC_DIR)/kernel$(NC)"; \
 		exit 1; \
 	fi
 	@if [ ! -f "requirements.txt" ]; then \
@@ -148,8 +149,8 @@ build-kernel:
 build-init:
 	@echo "$(BLUE)[BUILD] Building init process...$(NC)"
 	@mkdir -p $(OUTPUT_DIR)/init
-	@if [ -f "$(CORE_DIR)/init/src/main.c" ]; then \
-		$(CC) $(CFLAGS) -c $(CORE_DIR)/init/src/main.c -o $(OUTPUT_DIR)/init/init.o; \
+	@if [ -f "$(SRC_DIR)/core/init/src/main.c" ]; then \
+		$(CC) $(CFLAGS) -c $(SRC_DIR)/core/init/src/main.c -o $(OUTPUT_DIR)/init/init.o; \
 		$(CC) $(LDFLAGS) -o $(OUTPUT_DIR)/init/init $(OUTPUT_DIR)/init/init.o; \
 		strip $(STRIP_FLAGS) $(OUTPUT_DIR)/init/init 2>/dev/null || true; \
 		echo "$(GREEN)✓ Init binary created: $(OUTPUT_DIR)/init/init$(NC)"; \
@@ -174,14 +175,7 @@ build-shell:
 build-python: validate
 	@echo "$(BLUE)[BUILD] Building Python components...$(NC)"
 	@mkdir -p $(OUTPUT_DIR)/python
-	@for pyfile in $(TOOLS_DIR)/*.py; do \
-		if [ -f "$$pyfile" ]; then \
-			$(PYTHON) -m py_compile "$$pyfile" 2>/dev/null && \
-			echo "$(GREEN)  ✓ $$(basename $$pyfile)$(NC)" || \
-			echo "$(RED)  ✗ $$(basename $$pyfile)$(NC)"; \
-		fi \
-	done
-	@for pyfile in apps/*/carrot-*.py; do \
+	@for pyfile in $(TOOLS_DIR)/system/*.py $(TOOLS_DIR)/installer/*.py $(TOOLS_DIR)/build/*.py; do \
 		if [ -f "$$pyfile" ]; then \
 			$(PYTHON) -m py_compile "$$pyfile" 2>/dev/null && \
 			echo "$(GREEN)  ✓ $$(basename $$pyfile)$(NC)" || \
@@ -203,7 +197,7 @@ test: build-python
 
 check-syntax: validate
 	@echo "$(BLUE)[CHECK] Checking C syntax...$(NC)"
-	@for cfile in $(KERNEL_DIR)/*.c $(CORE_DIR)/*/*.c; do \
+	@for cfile in $(KERNEL_DIR)/*.c $(SRC_DIR)/*/*.c; do \
 		if [ -f "$$cfile" ]; then \
 			$(CC) $(CFLAGS) -fsyntax-only "$$cfile" && \
 			echo "$(GREEN)  ✓ $$cfile$(NC)" || \
@@ -211,7 +205,7 @@ check-syntax: validate
 		fi \
 	done
 	@echo "$(BLUE)[CHECK] Checking Python syntax...$(NC)"
-	@$(PYTHON) -m py_compile $(TOOLS_DIR)/*.py 2>/dev/null && \
+	@$(PYTHON) -m py_compile $(TOOLS_DIR)/system/*.py 2>/dev/null && \
 	echo "$(GREEN)✓ All Python files have valid syntax$(NC)" || \
 	echo "$(YELLOW)⚠ Some Python files have syntax errors$(NC)"
 
