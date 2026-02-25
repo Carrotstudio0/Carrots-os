@@ -248,7 +248,12 @@ void kernel_panic(const char *message) {
     /* Stop all CPUs */
     /* Halt system */
     while(1) {
-        asm volatile("hlt");
+        #ifdef __GNUC__
+            __asm__ __volatile__("hlt");
+        #else
+            /* Fallback for non-GCC compilers */
+            while(1);
+        #endif
     }
 }
 

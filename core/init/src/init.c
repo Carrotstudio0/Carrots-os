@@ -16,6 +16,64 @@
     typedef int pid_t;
     #define SIGTERM 15
     #define SIGKILL 9
+    #define SIGINT 2
+    #define SIGCHLD 17
+    #define SIG_IGN ((void (*)(int))(1L))
+    #define SIG_DFL ((void (*)(int))(0L))
+    
+    /* Additional Windows definitions */
+    #define WNOHANG 1
+    #define RB_AUTOBOOT 0x01234567
+    #define RB_POWER_OFF 0x4321fedc
+    
+    /* Stub signal function */
+    static inline void (*signal(int sig, void (*func)(int)))(int) { 
+        (void)sig;
+        return func; 
+    }
+    
+    /* Stub mount function */
+    static inline int mount(const char *a, const char *b, const char *c, int d, const void *e) {
+        (void)a; (void)b; (void)c; (void)d; (void)e;
+        return 0;
+    }
+    
+    /* Stub fork function */
+    static inline pid_t fork(void) { return -1; }
+    
+    /* Stub execv function */
+    static inline int execv(const char *path, char *const argv[]) {
+        (void)path; (void)argv;
+        return -1;
+    }
+    
+    /* Stub execl function */
+    static inline int execl(const char *path, const char *arg, ...) {
+        (void)path; (void)arg;
+        return -1;
+    }
+    
+    /* Stub kill function */
+    static inline int kill(pid_t pid, int sig) {
+        (void)pid; (void)sig;
+        return -1;
+    }
+    
+    /* Stub sleep function */
+    static inline unsigned int sleep(unsigned int secs) {
+        (void)secs;
+        return 0;
+    }
+    
+    /* Stub waitpid function */
+    static inline pid_t waitpid(pid_t pid, int *status, int options) {
+        (void)pid; (void)options;
+        if (status) *status = 0;
+        return -1;
+    }
+    
+    /* Stub sync function */
+    static inline void sync(void) { }
 #else
     /* Unix/Linux build */
     #include <unistd.h>
@@ -388,7 +446,7 @@ void emergency_shell(void) {
 /**
  * system_shutdown - Shutdown or reboot system
  */
-void system_shutdown(int reboot) {
+void system_shutdown(int do_reboot) {
     printf("[INIT] System shutdown initiated\n");
     
     /* Stop all services */
@@ -401,9 +459,13 @@ void system_shutdown(int reboot) {
     /* Unmount filesystems */
     sync();
     
-    if (reboot) {
+    if (do_reboot) {
+        #ifdef __linux__
         reboot(RB_AUTOBOOT);
+        #endif
     } else {
+        #ifdef __linux__
         reboot(RB_POWER_OFF);
+        #endif
     }
 }

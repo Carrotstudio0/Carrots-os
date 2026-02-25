@@ -12,9 +12,87 @@
 #include <map>
 #include <memory>
 #include <cstdlib>
-#include <unistd.h>
-#include <signal.h>
-#include <sys/wait.h>
+
+/* Platform-specific includes */
+#ifdef _WIN32
+    typedef int pid_t;
+    #define SIGTERM 15
+    #define SIGINT 2
+    #define SIGCHLD 17
+    #define SIG_IGN ((void (*)(int))(1L))
+    #define SIG_DFL ((void (*)(int))(0L))
+    #define WNOHANG 1
+    
+    /* Stub fork function for Windows */
+    static inline pid_t fork(void) { return -1; }
+    
+    /* Stub execvp for Windows */
+    static inline int execvp(const char *file, char *const argv[]) { 
+        (void)file; (void)argv;
+        return -1; 
+    }
+    
+    /* Stub execl for Windows */
+    static inline int execl(const char *path, const char *arg, ...) {
+        (void)path; (void)arg;
+        return -1;
+    }
+    
+    /* Stub wait for Windows */
+    static inline pid_t wait(int *status) {
+        if (status) *status = 0;
+        return -1;
+    }
+    
+    /* Stub kill for Windows */
+    static inline int kill(pid_t pid, int sig) {
+        (void)pid; (void)sig;
+        return -1;
+    }
+    
+    /* Stub sigset_t and signal functions */
+    typedef int sigset_t;
+    
+    static inline int sigemptyset(sigset_t *set) {
+        if (set) *set = 0;
+        return 0;
+    }
+    
+    static inline int sigaddset(sigset_t *set, int signum) {
+        (void)signum;
+        if (set) *set |= 1;
+        return 0;
+    }
+    
+    static inline int sigwait(const sigset_t *set, int *sig) {
+        (void)set;
+        if (sig) *sig = 0;
+        return 0;
+    }
+    
+    /* Stub signal function */
+    static inline void (*signal(int sig, void (*func)(int)))(int) {
+        (void)sig;
+        return func;
+    }
+    
+    /* Stub sleep function */
+    static inline unsigned int sleep(unsigned int secs) {
+        (void)secs;
+        return 0;
+    }
+    
+    /* Stub waitpid function */
+    static inline pid_t waitpid(pid_t pid, int *status, int options) {
+        (void)pid; (void)options;
+        if (status) *status = 0;
+        return -1;
+    }
+#else
+    #include <unistd.h>
+    #include <signal.h>
+    #include <sys/wait.h>
+#endif
 
 #define SHELL_VERSION "1.0"
 #define SHELL_NAME "Carrot Shell"
