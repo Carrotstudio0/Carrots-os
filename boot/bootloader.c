@@ -84,7 +84,6 @@ typedef struct {
 #endif /* __BOOTLOADER_H__ */
 
 /* Implementation section */
-#include "bootloader.h"
 
 /**
  * bootloader_entry - Multiboot2 entry point

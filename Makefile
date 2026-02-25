@@ -8,7 +8,8 @@
 BUILD_DIR := build
 OUTPUT_DIR := $(BUILD_DIR)/output
 TOOLS_DIR := tools
-PYTHON := python3
+# Check for Python in virtual environment first, then system
+PYTHON := $(shell if [ -f ".venv/Scripts/python.exe" ]; then echo ".venv/Scripts/python.exe"; elif command -v python3 >/dev/null 2>&1; then echo "python3"; elif command -v python >/dev/null 2>&1; then echo "python"; else echo "python"; fi)
 CC := gcc
 CXX := g++
 CFLAGS := -std=c99 -Wall -Wextra -fPIC -Iinclude

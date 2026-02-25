@@ -8,12 +8,22 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/mount.h>
+
+/* Platform-specific includes */
+#ifdef _WIN32
+    /* Windows build - stub implementations */
+    typedef int pid_t;
+    #define SIGTERM 15
+    #define SIGKILL 9
+#else
+    /* Unix/Linux build */
+    #include <unistd.h>
+    #include <signal.h>
+    #include <sys/types.h>
+    #include <sys/wait.h>
+    #include <sys/mount.h>
+#endif
 
 #define INIT_VERSION "1.0"
 #define MAX_SERVICES 32
