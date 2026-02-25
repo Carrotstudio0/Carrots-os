@@ -77,67 +77,108 @@
 
 ---
 
+## � Quick Start | البدء السريع
+
+### 🪟 Building on Windows (No WSL/Docker!)
+
+**CarrotOS now builds natively on Windows without any virtualization!**
+
+```powershell
+# 1. Automatic setup (recommended)
+.\setup-windows.ps1
+
+# 2. Build the system
+.\build.ps1 -BuildAll
+
+# 3. Burn to USB with Rufus
+# Download: https://rufus.ie/
+```
+
+**See [QUICKSTART_WINDOWS.md](QUICKSTART_WINDOWS.md) for detailed setup.**
+
+### 🐧 Building on Linux
+```bash
+make all
+make install
+```
+
+---
+
 ## 📁 Project Structure
 
 ```
 CarrotOS/
-├── 📄 Documentation
+├── 📄 Core Files
 │   ├── README.md (this file)
-│   ├── ARCHITECTURE.md (system architecture)
-│   ├── CONTRIBUTING.md (contribution guidelines)
-│   └── CODE_QUALITY_STANDARDS.md (code standards)
+│   ├── QUICKSTART_WINDOWS.md (Windows setup guide)
+│   ├── BUILD_WINDOWS_SETUP.md (detailed setup)
+│   ├── Makefile (Unix/Linux build)
+│   ├── build.ps1 (PowerShell builder)
+│   ├── build.bat (Windows batch build)
+│   ├── setup-windows.ps1 (auto Windows setup)
+│   ├── LICENSE & requirements.txt
 │
-├── 🔧 Kernel & Core
+├── 🔧 src/ - Source Code
 │   ├── kernel/
-│   │   ├── kernel.c (main kernel)
+│   │   ├── kernel.c (main kernel ~550 lines)
+│   │   ├── kernel.h (kernel headers)
 │   │   ├── kernel-build.cfg (kernel config)
-│   │   └── src/ (kernel source)
-│   └── core/
-│       ├── init/ (init process - PID 1)
-│       ├── ipc/ (inter-process communication)
-│       ├── logging/ (system logging)
-│       └── session/ (session management)
-│
-├── 🖥️ Desktop Environment
+│   │   └── src/ (boot.asm, bootloader)
+│   ├── core/
+│   │   ├── init/ (PID 1 init system)
+│   │   ├── ipc/ (inter-process communication)
+│   │   ├── logging/ (system logging)
+│   │   └── session/ (session management)
 │   ├── desktop/
 │   │   ├── shell/ (desktop shell)
 │   │   ├── compositor/ (display server)
-│   │   └── themes/ (UI themes)
-│   └── apps/ (system applications)
+│   │   ├── themes/ (UI themes)
+│   │   └── src/ (desktop utilities)
+│   └── boot/ (bootloader code)
+│
+├── 🛠️ tools/ - Build & System Tools
+│   ├── build/
+│   │   ├── iso_builder.py (Windows ISO creator)
+│   │   └── iso_creator.py
+│   ├── system/
+│   │   ├── driver_manager.py
+│   │   ├── update_manager.py
+│   │   ├── power_manager.py
+│   │   ├── theme_engine.py
+│   │   ├── user_manager.py
+│   │   └── network_manager.py
+│   ├── installer/
+│   │   ├── carrot-installer.py
+│   │   ├── disk_manager.py
+│   │   └── install_backend.py
+│   └── scripts/ (utility scripts)
+│
+├── 📱 apps/ - Applications
+│   ├── core/
+│   │   ├── desktop-shell/
+│   │   ├── display-manager/
+│   │   ├── files/
+│   │   └── software-center/
+│   ├── system/
+│   │   ├── control-center/
+│   │   ├── settings/
+│   │   ├── driver-manager/
+│   │   ├── update-center/
+│   │   └── user-manager/
+│   └── utilities/
 │       ├── terminal/
-│       ├── file-manager/
 │       ├── text-editor/
-│       ├── browser/
-│       └── ...
+│       └── browser/
 │
-├── 🛠️ System Tools
-│   └── tools/
-│       ├── driver_manager.py
-│       ├── update_manager.py
-│       ├── power_manager.py
-│       ├── theme_engine.py
-│       ├── user_manager.py
-│       ├── network_manager.py
-│       ├── iso_creator.py
-│       └── carrot-installer.py
+├── 📦 build-artifacts/ - Build Output
+│   ├── build/ (compiled objects, binaries)
+│   ├── iso/ (ISO staging files)
+│   ├── overlays/ (filesystem overlays)
+│   ├── rootfs/ (root filesystem)
+│   └── output/ (final output)
 │
-├── ⚙️ Build System
-│   ├── Makefile (comprehensive build)
-│   ├── build/ (build output)
-│   └── requirements.txt (Python dependencies)
-│
-├── 📚 Documentation
-│   └── docs/
-│       ├── SYSTEM_ARCHITECTURE.md
-│       ├── SYSTEM_INTEGRATION.md
-│       ├── USER_MANAGEMENT.md
-│       └── CONTROL_CENTER.md
-│
-└── 🔐 System Files
-    ├── security/
-    ├── packages/
-    ├── services/
-    └── overlays/
+└── ⚙️ config/ - Configuration
+    └── desktop-registry.conf
 ```
 
 ---
@@ -146,64 +187,84 @@ CarrotOS/
 
 ### Build Requirements
 - **OS**: Linux, macOS, or Windows (WSL2)
-- **Tools**: 
-  - C compiler (gcc)
-  - C++ compiler (g++)
-  - Python 3.8+
-  - Make
-  - Git
+---
 
-### Build Instructions
+## 📋 Build Requirements
 
-```bash
-# 1. Validate project structure
-make validate
+### Windows (Native)
+- **MinGW-w64** (GCC 13.2+)
+- **NASM** (Netwide Assembler)
+- **Python 3.11+**
+- **PowerShell 5.1+** (usually pre-installed)
+- **No WSL / No Docker required!**
 
-# 2. Install dependencies
-make install-deps
+### Linux / macOS
+- **GCC / Clang** C compiler
+- **G++** C++ compiler
+- **Python 3.8+**
+- **Make**
+- **NASM**
 
-# 3. Build all components
-make all
+## 🔨 Build Instructions
 
-# 4. Build specific components
-make build-kernel    # Kernel only
-make build-init      # Init system only
-make build-python    # Python tools only
+### Windows Setup (First Time)
 
-# 5. Create bootable ISO
-make iso
+```powershell
+# Option 1: Automatic setup (recommended)
+.\setup-windows.ps1
+
+# Option 2: Manual - see QUICKSTART_WINDOWS.md
 ```
 
-### Quick Start
+### Windows Build
+
+```powershell
+# Validate environment
+.\build.ps1 -Validate
+
+# Build everything
+.\build.ps1 -BuildAll
+
+# Build specific component
+.\build.ps1 -BuildKernel
+.\build.ps1 -BuildInit
+.\build.ps1 -BuildISO
+
+# Or use batch file (simpler)
+build.bat all
+build.bat kernel
+build.bat iso
+```
+
+### Linux/macOS Build
 
 ```bash
-# Show available targets
-make help
+# Validate structure
+make validate
 
-# Clean build artifacts
+# Install dependencies
+make install-deps
+
+# Build all
+make all
+
+# Build specific parts
+make build-kernel
+make build-init
+make build-python
+
+# Clean up
 make clean
-
-# Full clean (including virtual environment)
 make distclean
-
-# Run tests
-make test
-
-# Check code syntax
-make check-syntax
-
-# Check code style
-make check-style
 ```
 
 ---
 
 ## 📖 Documentation
 
-- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - System architecture and components
-- **[CODE_QUALITY_STANDARDS.md](CODE_QUALITY_STANDARDS.md)** - Code standards and best practices
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute to the project
-- **[docs/](docs/)** - Additional documentation
+- **[QUICKSTART_WINDOWS.md](QUICKSTART_WINDOWS.md)** - Windows setup guide
+- **[BUILD_WINDOWS_SETUP.md](BUILD_WINDOWS_SETUP.md)** - Detailed Windows setup
+- **[Makefile](Makefile)** - Build system documentation
 
 ---
 
