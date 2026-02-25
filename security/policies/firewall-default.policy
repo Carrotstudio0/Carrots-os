@@ -1,0 +1,67 @@
+# CarrotOS Default Firewall Policy
+# Stateful firewall rules for network security
+
+# Policy defaults
+default_input: DROP
+default_forward: DROP
+default_output: ACCEPT
+
+# Input rules
+rules_input:
+  - name: "Allow loopback"
+    interface: lo
+    action: ACCEPT
+    
+  - name: "Allow established connections"
+    protocol: tcp
+    state: ESTABLISHED,RELATED
+    action: ACCEPT
+    
+  - name: "Allow SSH (port 22)"
+    protocol: tcp
+    destination_port: 22
+    action: ACCEPT
+    limit: 5/minute
+    
+  - name: "Allow HTTP (port 80)"
+    protocol: tcp
+    destination_port: 80
+    action: ACCEPT
+    
+  - name: "Allow HTTPS (port 443)"
+    protocol: tcp
+    destination_port: 443
+    action: ACCEPT
+    
+  - name: "Allow mDNS discovery"
+    protocol: udp
+    destination_port: 5353
+    action: ACCEPT
+    
+  - name: "Allow DNS queries"
+    protocol: udp
+    destination_port: 53
+    action: ACCEPT
+    
+  - name: "Allow DHCP client"
+    protocol: udp
+    source_port: 67
+    destination_port: 68
+    action: ACCEPT
+    
+  - name: "Allow ICMPv4 ping"
+    protocol: icmp
+    icmp_type: 8
+    rate_limit: 10/s
+    action: ACCEPT
+
+# Output rules
+rules_output:
+  - rule: "Allow all outbound"
+    action: ACCEPT
+
+# TCP security settings
+tcp:
+  enable_syncookies: true
+  enable_timestamps: true
+  reject_invalid_packets: true

@@ -1,0 +1,9 @@
+profile: carrotos-live-safe-graphics
+boot_mode: hybrid-bios-uefi
+secure_mode: true
+graphics: safe
+kernel_params:
+  - nomodeset
+session:
+  shell: carrot-shell
+  autologin: false

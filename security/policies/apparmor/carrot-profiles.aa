@@ -1,0 +1,81 @@
+# CarrotOS AppArmor Security Profiles
+# Mandatory Access Control policies
+
+#include <tunables/global>
+
+# Base profile for daemon services
+profile carrot-daemon flags=(attach_disconnected) {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+
+  # System files
+  /proc/sys/kernel/osrelease r,
+  /etc/hostname r,
+  /etc/os-release r,
+  
+  # Logging
+  owner /var/log/carrot*.log w,
+  /dev/log w,
+  
+  # Runtime
+  /run/carrot/ rw,
+  /run/user/*/carrot/ rw,
+  
+  # Capabilities required
+  capability net_bind_service,
+  capability setuid,
+  capability setgid,
+  capability dac_override,
+  
+  # Signal handling
+  signal (send) peer=unconfined,
+  signal (receive) peer=unconfined,
+}
+
+# Network daemon profile
+profile carrot-networkd flags=(attach_disconnected) {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+  #include <abstractions/openssl>
+  
+  # Network access
+  capability net_admin,
+  capability net_bind_service,
+  capability sys_module,
+  
+  # Configuration files
+  /etc/network/ r,
+  /etc/network/** r,
+  /etc/hostname r,
+  /etc/hosts r,
+  /etc/resolv.conf r,
+  
+  # Runtime data
+  /run/networkd/ rw,
+  /run/network/ rw,
+  /var/log/network*.log w,
+  
+  # System calls
+  /sys/class/net/** r,
+  /sys/devices/virtual/net/** r,
+}
+
+# Display server profile
+profile carrot-compositor {
+  #include <abstractions/base>
+  #include <abstractions/audio>
+  
+  # Video access
+  capability sys_nice,
+  capability setgid,
+  capability setuid,
+  
+  /dev/dri/ r,
+  /dev/dri/** rw,
+  /dev/input/* rw,
+  /dev/uinput rw,
+  
+  # Memory mapping
+  /proc/*/maps r,
+  /proc/*/stat r,
+}

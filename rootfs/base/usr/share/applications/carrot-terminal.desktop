@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Terminal
+Comment=Terminal emulator
+Exec=/usr/bin/carrot-terminal
+Icon=utilities-terminal
+Categories=Utilities;System;
+Terminal=false
+StartupNotify=true
+

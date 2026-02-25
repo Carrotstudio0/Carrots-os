@@ -1,0 +1,7 @@
+profile: carrotos-live-desktop
+boot_mode: hybrid-bios-uefi
+secure_mode: true
+graphics: auto
+session:
+  shell: carrot-shell
+  autologin: false

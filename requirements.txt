@@ -1,0 +1,73 @@
+# CarrotOS Build Requirements
+# Install with: pip install -r requirements.txt
+
+# Core Python Dependencies
+psutil>=5.9.0              # System monitoring and performance
+Pillow>=9.0.0              # Image processing
+
+# Build and Packaging
+setuptools>=65.0           # Package distribution tools
+wheel>=0.37.0              # Wheel package format
+twine>=4.0.0               # Package uploading
+
+# GUI Dependencies (may be pre-installed)
+# tkinter - usually comes with Python
+
+# System Communication
+pyyaml>=6.0                # YAML configuration files
+paramiko>=3.0              # SSH connections
+pexpect>=4.9.0             # Expect-like functionality
+
+# Compression & Archive
+tarfile                    # Built-in Python (tar archives)
+zipfile                    # Built-in Python (zip archives)
+gzip                       # Built-in Python (gzip compression)
+
+# Hashing & Security
+hashlib                    # Built-in Python (checksums)
+cryptography>=41.0         # Encryption utilities
+
+# Development & Testing
+pytest>=7.0                # Unit testing framework
+pytest-cov>=4.0            # Code coverage (optional)
+flake8>=5.0                # Code linting (optional)
+black>=22.0                # Code formatting (optional)
+
+# System Tools (must be installed separately)
+# python3 - Python interpreter
+# gcc/g++ - C/C++ compiler toolchain
+# make - Build automation
+# xorriso - ISO/CDRW tool
+# git - Version control
+# docker - Containerization (optional)
+# qemu - Virtual machine (optional)
+
+# Installation Instructions
+
+## Ubuntu/Debian:
+# sudo apt-get update
+# sudo apt-get install -y python3-pip
+# sudo apt-get install -y build-essential gcc g++ make
+# sudo apt-get install -y xorriso git
+# sudo apt-get install -y libssl-dev libffi-dev
+# pip3 install -r requirements.txt
+
+## Fedora/RHEL:
+# sudo dnf install -y python3 python3-pip
+# sudo dnf install -y gcc g++ make
+# sudo dnf groupinstall -y "Development Tools"
+# sudo dnf install -y xorriso git
+# pip3 install -r requirements.txt
+
+## macOS (Homebrew):
+# brew install python3 python
+# brew install gcc make
+# brew install xorriso git
+# pip3 install -r requirements.txt
+
+## Windows (WSL2):
+# sudo apt update && sudo apt upgrade
+# sudo apt install -y python3-pip
+# sudo apt install -y build-essential gcc g++ make
+# sudo apt install -y xorriso git
+# pip3 install -r requirements.txt

@@ -1,0 +1,71 @@
+# System Service Definitions for CarrotOS
+# Format: service name, executable path, auto-start, runlevel, respawn
+
+# Essential services (runlevel 2 - multiuser text)
+system/syslogd.service:
+  description: "System logging daemon"
+  exec_path: /usr/sbin/syslogd
+  auto_start: true
+  runlevel: 2
+  respawn: true
+  dependencies: []
+
+system/mountd.service:
+  description: "Filesystem mount daemon"
+  exec_path: /usr/sbin/mountd
+  auto_start: true
+  runlevel: 2
+  respawn: true
+  dependencies: []
+
+system/device-manager.service:
+  description: "Device event manager"
+  exec_path: /usr/sbin/udevd
+  auto_start: true
+  runlevel: 2
+  respawn: true
+  dependencies: []
+
+# Network services
+system/network.service:
+  description: "Network configuration service"
+  exec_path: /usr/sbin/networkd
+  auto_start: true
+  runlevel: 2
+  respawn: true
+  depends_on: [device-manager.service]
+
+system/dhclient.service:
+  description: "DHCP client"
+  exec_path: /usr/sbin/dhclient
+  auto_start: false
+  runlevel: 2
+  respawn: false
+  depends_on: [network.service]
+
+# GUI services (runlevel 5)
+desktop/weston.service:
+  description: "Wayland display server"
+  exec_path: /usr/bin/weston
+  auto_start: true
+  runlevel: 5
+  respawn: true
+  session_type: wayland
+  depends_on: [device-manager.service]
+
+desktop/loginmanager.service:
+  description: "Login/Display manager"
+  exec_path: /usr/bin/carrot-login
+  auto_start: true
+  runlevel: 5
+  respawn: true
+  depends_on: [weston.service]
+
+# System update service
+system/update.service:
+  description: "System update daemon"
+  exec_path: /usr/sbin/carrot-updater
+  auto_start: false
+  runlevel: 2
+  respawn: true
+  depends_on: [network.service]

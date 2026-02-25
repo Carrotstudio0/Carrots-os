@@ -1,0 +1,46 @@
+# CarrotOS System Update Service Definition
+# Manages automatic system updates and patches
+
+name: update
+type: system
+description: "System update and patch management service"
+
+# Service executable
+executable: /usr/sbin/carrot-updater
+working_directory: /var/lib/updates
+
+# Service behavior
+restart_policy: on-failure
+restart_delay_ms: 5000
+max_restart_attempts: 3
+
+# Environment variables
+environment:
+  UPDATE_CHANNEL: stable
+  UPDATE_CHECK_INTERVAL: 3600
+  AUTO_UPDATE: "false"
+
+# Dependencies
+start_after:
+  - carrot-network
+
+# Update configuration
+update_config:
+  check_interval_hours: 24
+  auto_download: true
+  auto_install: false
+  reboot_on_update: false
+  rollback_support: true
+
+# Logging
+logging:
+  level: INFO
+  output: both
+  file: /var/log/updates.log
+  max_size: 100M
+
+# Resource limits
+resources:
+  memory_limit_mb: 512
+  cpu_limit_percent: 50
+  disk_limit_gb: 2

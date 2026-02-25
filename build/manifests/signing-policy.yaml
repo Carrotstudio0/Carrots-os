@@ -1,0 +1,12 @@
+signing:
+  required:
+    - bootloader
+    - kernel
+    - initramfs
+    - rootfs
+    - overlays
+verification:
+  fail_mode: hard-stop
+developer_mode:
+  allow_unsigned_overlays: true
+  require_boot_warning: true

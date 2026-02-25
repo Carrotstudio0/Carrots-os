@@ -1,0 +1,46 @@
+# CarrotOS sudoers Configuration
+# This file MUST be edited with visudo command only
+# Syntax: user/group host = (runas) commands
+
+# Defaults section
+Defaults:root !authenticate
+Defaults:root !requiretty
+Defaults !visiblepw
+Defaults always_set_home
+Defaults always_query_group_plugin
+Defaults drop_user_cs_ppw
+
+# Enable use of sudoedit
+Defaults sudoedit_follow,sudoedit_checkdir
+
+# Logging
+Defaults log_file="/var/log/sudo.log"
+
+# Default PATH
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Root user
+root ALL=(ALL:ALL) ALL
+
+# System group
+%sudo ALL=(ALL:ALL) ALL
+
+# Users can run specific commands without password
+admin ALL=(ALL) NOPASSWD: /usr/sbin/carrot-*
+admin ALL=(ALL) NOPASSWD: /sbin/*
+admin ALL=(ALL) NOPASSWD: /usr/sbin/*
+
+developer ALL=(ALL) NOPASSWD: /usr/bin/python3
+developer ALL=(ALL) NOPASSWD: /usr/bin/gcc
+developer ALL=(ALL) NOPASSWD: /usr/bin/make
+
+# Standard user restricted sudo
+user ALL=(ALL) NOPASSWD: /bin/mount,/bin/umount
+user ALL=(ALL) NOPASSWD: /usr/bin/apt,/usr/bin/apt-get
+user ALL=(ALL) NOPASSWD: /sbin/reboot,/sbin/shutdown
+
+# Allow guest to run only basic commands
+guest ALL=(ALL) NOPASSWD: /bin/true
+
+# Include drop-in directory
+#include /etc/sudoers.d/*

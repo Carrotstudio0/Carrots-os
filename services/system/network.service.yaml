@@ -1,0 +1,48 @@
+# CarrotOS Network Service Definition
+# Manages network interfaces, routing, and connectivity
+
+name: network
+type: system
+description: "Network configuration and management service"
+
+# Service executable
+executable: /usr/sbin/networkd
+working_directory: /var/run/networkd
+
+# Service behavior
+restart_policy: always
+restart_delay_ms: 3000
+max_restart_attempts: 10
+
+# Environment variables
+environment:
+  CONFIG_DIR: /etc/network
+  STATE_DIR: /run/network
+  LOG_LEVEL: INFO
+
+# Dependencies (start after these services)
+start_after:
+  - carrot-device
+  - carrot-logging
+
+# Sockets for IPC
+sockets:
+  - networkd.socket
+  - networkctl.socket
+
+# Logging configuration
+logging:
+  level: INFO
+  output: both
+  file: /var/log/network.log
+  max_size: 50M
+
+# Resource limits
+resources:
+  memory_limit_mb: 256
+  priority: normal
+
+# Configuration files to monitor for changes
+config_watch:
+  - /etc/network/*.conf
+  - /etc/hostname

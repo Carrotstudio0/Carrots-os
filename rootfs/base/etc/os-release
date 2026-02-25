@@ -1,0 +1,34 @@
+# CarrotOS OS Release Information
+# Standard Linux /etc/os-release file
+
+NAME="CarrotOS"
+ID="carrotos"
+PRETTY_NAME="CarrotOS 1.0.0 (Carrot-LTS)"
+VERSION="1.0.0"
+VERSION_ID="1.0.0"
+VERSION_CODENAME="Carrot-LTS"
+BUILD_ID="20260225"
+
+# URLs
+HOME_URL="https://carrotos.org/"
+DOCUMENTATION_URL="https://docs.carrotos.org/"
+SUPPORT_URL="https://support.carrotos.org/"
+BUG_REPORT_URL="https://bugs.carrotos.org/"
+PRIVACY_URL="https://carrotos.org/privacy"
+
+# Distribution details
+ID_LIKE="linux"
+VARIANT="Desktop"
+VARIANT_ID="desktop"
+
+# Visual settings
+ANSI_COLOR="1;33"
+LOGO="carrotos"
+
+# Build information
+KERNEL_VERSION="5.15.0-carrot-lts"
+BUILD_TYPE="lts"
+MAINTENANCE_URL="https://carrotos.org/maintenance"
+HOME_URL="https://example.invalid/carrotos"
+SUPPORT_URL="https://example.invalid/carrotos/support"
+BUG_REPORT_URL="https://example.invalid/carrotos/issues"

@@ -1,0 +1,15 @@
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Build outputs
+out/
+dist/
+artifacts/
+*.iso
+*.img
+
+# Temp
+*.tmp
+*.log

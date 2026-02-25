@@ -1,0 +1,3 @@
+#!/bin/sh
+# CarrotOS File Manager Wrapper
+exec /usr/bin/python3 /usr/lib/carrot/apps/carrot-files.py "$@"

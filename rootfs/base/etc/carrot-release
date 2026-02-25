@@ -1,0 +1,27 @@
+# CarrotOS Release Information
+# /etc/carrot-release - Identification file for the distribution
+
+# Distribution information
+NAME="CarrotOS"
+VERSION="1.0.0"
+ID=carrotos
+ID_LIKE=linux
+VERSION_ID=1.0
+PRETTY_NAME="CarrotOS 1.0.0 (Carrot-LTS)"
+ANSI_COLOR="1;33"
+
+# URLs
+HOME_URL="https://carrotos.org"
+DOCUMENTATION_URL="https://docs.carrotos.org"
+SUPPORT_URL="https://support.carrotos.org"
+BUG_REPORT_URL="https://bugs.carrotos.org"
+
+# Build information
+BUILD_ID="20260225"
+BUILD_HOST="carrot-build-1"
+
+# Codename
+VERSION_CODENAME="Carrot-LTS"
+
+# Release notes
+RELEASE_NOTES_URL="https://carrotos.org/releases/1.0.0"

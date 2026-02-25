@@ -1,0 +1,13 @@
+version: 1
+zones:
+  left:
+    - carrot-launcher
+    - carrot-search
+  center:
+    - task-switcher
+  right:
+    - net-indicator
+    - audio-indicator
+    - battery-indicator
+    - notifications
+    - clock

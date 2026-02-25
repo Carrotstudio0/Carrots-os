@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=File Manager
+Comment=Browse files and folders
+Exec=/usr/bin/carrot-files
+Icon=folder
+Categories=System;Utility;
+Terminal=false
+StartupNotify=true
+

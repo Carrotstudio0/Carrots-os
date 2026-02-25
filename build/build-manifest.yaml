@@ -1,0 +1,156 @@
+# CarrotOS Build Manifest
+# Comprehensive build instructions and targets
+
+---
+build_manifest_version: 1
+project: CarrotOS
+build_date: 2026-02-25
+
+# Build environment
+environment:
+  native_host: Windows
+  target_platform: Linux
+  target_arch: x86_64
+  target_bits: 64
+  
+# Compiler and tools
+toolchain:
+  c_compiler: gcc
+  cpp_compiler: g++
+  python: python3
+  build_system: make
+  package_manager: carrot-pkg
+  
+# Source components to build
+components:
+  - name: kernel
+    path: kernel/
+    language: C
+    build_type: native
+    target: bzImage
+    output: build/kernel/bzImage
+    
+  - name: bootloader
+    path: boot/
+    language: C
+    build_type: native
+    target: grub-image
+    output: build/boot/boot.img
+    
+  - name: init-system
+    path: core/init/
+    language: C
+    build_type: native
+    target: binary
+    output: build/bin/init
+    
+  - name: desktop-shell
+    path: desktop/shell/
+    language: C++
+    build_type: native
+    dependencies:
+      - wayland-client
+      - wayland-protocols
+      - cairo
+    target: binary
+    output: build/bin/carrot-shell
+    
+  - name: compositor
+    path: desktop/compositor/
+    language: C
+    build_type: native
+    dependencies:
+      - weston
+      - libweston-12
+    target: binary
+    output: build/bin/weston
+    
+  - name: applications
+    path: apps/
+    language: mixed
+    build_type: native
+    subdirs:
+      - files/
+      - terminal/
+      - settings/
+      - software-center/
+    
+  - name: tools
+    path: tools/scripts/
+    language: Python
+    build_type: script
+    scripts:
+      - overlay_resolver.py
+      - build.py
+      - package.py
+
+# Build targets
+targets:
+  - name: kernel-image
+    depends: [kernel]
+    output: build/kernel/bzImage
+    
+  - name: boot-image
+    depends: [bootloader]
+    output: build/boot/boot.img
+    
+  - name: rootfs-squash
+    depends: [init-system, applications]
+    script: tools/scripts/build_rootfs.py
+    output: build/rootfs/root.squashfs
+    
+  - name: overlay-stack
+    script: tools/scripts/resolve_overlays.py
+    output: build/overlays/
+    
+  - name: iso-image
+    depends: [kernel-image, boot-image, rootfs-squash, overlay-stack]
+    script: tools/scripts/build_iso.py
+    output: build/release/CarrotOS-1.0.0-x86_64.iso
+    
+  - name: all
+    depends: [iso-image]
+
+# Build flags
+compilation_flags:
+  common:
+    - -Wall
+    - -Wextra
+    - -fPIC
+    - -O2
+  
+  c_flags:
+    - -std=gnu11
+    - -fno-stack-protector
+    - -march=x86-64
+  
+  cpp_flags:
+    - -std=c++17
+    - -fno-exceptions
+    - -fno-rtti
+
+# Linking
+linking:
+  library_paths:
+    - /usr/lib/x86_64-linux-gnu
+    - /usr/local/lib
+  
+  system_libs:
+    - c
+    - m
+    - dl
+    - pthread
+
+# Output
+output:
+  build_dir: build/
+  iso_dir: build/release/
+  packages_dir: build/packages/
+  logs_dir: build/logs/
+  
+# Cleanup
+clean_targets:
+  - build/
+  - "*.o"
+  - "*.a"
+  - "*.so"

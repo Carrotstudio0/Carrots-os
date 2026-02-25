@@ -1,0 +1,9 @@
+version: 1
+modules:
+  - id: network
+  - id: display
+  - id: sound
+  - id: power
+  - id: users
+  - id: security
+  - id: updates

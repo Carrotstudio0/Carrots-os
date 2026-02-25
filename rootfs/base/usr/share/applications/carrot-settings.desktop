@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=System Settings
+Comment=Computer settings
+Exec=/usr/bin/carrot-settings
+Icon=preferences-system
+Categories=System;Settings;
+Terminal=false
+StartupNotify=true
+

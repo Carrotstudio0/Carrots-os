@@ -1,0 +1,197 @@
+#!/usr/bin/env sh
+# CarrotOS init system - PID 1
+# Minimal init implementation for CarrotOS
+
+set -e
+
+# ============================================================================
+# Initialization Functions
+# ============================================================================
+
+log() {
+    echo "[$(date '+%H:%M:%S')] [init] $@"
+}
+
+log_error() {
+    echo "[$(date '+%H:%M:%S')] [init ERROR] $@" >&2
+}
+
+# ============================================================================
+# Stage 1: Mount Essential Filesystems
+# ============================================================================
+
+mount_filesystems() {
+    log "Stage 1: Mounting essential filesystems"
+    
+    # Check if already mounted
+    [ -e /proc/cmdline ] || mount -t proc proc /proc
+    [ -e /sys/kernel ] || mount -t sysfs sysfs /sys
+    [ -e /dev/null ] || mount -t devtmpfs devtmpfs /dev
+    [ -e /run/lock ] || mount -t tmpfs tmpfs /run
+    [ -e /tmp/test ] || mount -t tmpfs tmpfs /tmp
+    
+    # Create necessary dev files
+    [ -c /dev/console ] || mknod /dev/console c 5 1
+    [ -c /dev/null ] || mknod /dev/null c 1 3
+    [ -c /dev/zero ] || mknod /dev/zero c 1 5
+    [ -c /dev/tty ] || mknod /dev/tty c 5 0
+    
+    # Mount pts
+    mkdir -p /dev/pts
+    mount -t devpts devpts /dev/pts
+    
+    # Mount shm
+    mkdir -p /dev/shm
+    mount -t tmpfs tmpfs /dev/shm
+    
+    log "Filesystems mounted"
+}
+
+# ============================================================================
+# Stage 2: Setup Hostname and Networking Basics
+# ============================================================================
+
+setup_hostname() {
+    log "Stage 2: Setting up hostname"
+    
+    if [ -r /etc/hostname ]; then
+        hostname $(cat /etc/hostname)
+    else
+        hostname carrotos
+    fi
+    
+    # Setup lo interface
+    ip link set lo up
+    ip addr add 127.0.0.1/8 dev lo
+    
+    log "Hostname: $(cat /etc/hostname 2>/dev/null || echo 'carrotos')"
+}
+
+# ============================================================================
+# Stage 3: Setup Logging
+# ============================================================================
+
+setup_logging() {
+    log "Stage 3: Setting up logging"
+    
+    mkdir -p /var/log
+    
+    # Start syslog if available
+    if command -v syslogd >/dev/null 2>&1; then
+        syslogd -D -l 7 &
+        log "Syslog daemon started"
+    fi
+    
+    # Setup dmesg
+    dmesg | head -20 > /var/log/boot.log
+}
+
+# ============================================================================
+# Stage 4: Load Services from Configuration
+# ============================================================================
+
+load_services() {
+    log "Stage 4: Loading service definitions"
+    
+    SERVICE_DIR="/etc/carrot/services"
+    
+    if [ ! -d "$SERVICE_DIR" ]; then
+        log_error "Service directory not found: $SERVICE_DIR"
+        return 1
+    fi
+    
+    # Count YAML files
+    SERVICE_COUNT=$(find "$SERVICE_DIR" -name "*.service.yaml" 2>/dev/null | wc -l)
+    log "Found $SERVICE_COUNT services"
+}
+
+# ============================================================================
+# Stage 5: Mount Overlay Filesystem
+# ============================================================================
+
+mount_overlays() {
+    log "Stage 5: Setting up overlay filesystem"
+    
+    # If using overlayfs
+    if grep -q overlayfs /etc/fstab 2>/dev/null; then
+        log "Overlay filesystem detected in fstab"
+        # Would mount actual overlays here
+    fi
+}
+
+# ============================================================================
+# Stage 6: Spawn Essential Services
+# ============================================================================
+
+spawn_services() {
+    log "Stage 6: Starting essential services"
+    
+    # Start minimal getty on tty1
+    if [ -x /sbin/agetty ] || [ -x /sbin/getty ]; then
+        nohup /sbin/agetty --autologin user tty1 > /dev/null 2>&1 &
+        log "TTY1 getty started"
+    fi
+    
+    # Start display manager if available
+    if [ -x /usr/bin/carrot-login ]; then
+        nohup /usr/bin/carrot-login > /var/log/display-manager.log 2>&1 &
+        log "Display manager started"
+    fi
+    
+    # Start network manager if available
+    if [ -x /usr/sbin/networkd ]; then
+        nohup /usr/sbin/networkd > /var/log/network.log 2>&1 &
+        log "Network daemon started"
+    fi
+}
+
+# ============================================================================
+# Stage 7: Main Event Loop
+# ============================================================================
+
+main_loop() {
+    log "Stage 7: Entering main event loop"
+    log "CarrotOS initialization complete"
+    
+    # Signal handlers
+    handle_sigterm() {
+        log "SIGTERM received, initiating shutdown"
+        exit 0
+    }
+    
+    handle_sigchld() {
+        # Reap zombie processes
+        while true; do
+            child=$(ps -o pid= -p $! 2>/dev/null)
+            [ -z "$child" ] && break
+            wait 2>/dev/null || break
+        done
+    }
+    
+    trap handle_sigterm SIGTERM
+    trap handle_sigchld SIGCHLD
+    
+    # Main loop - just wait
+    while true; do
+        sleep 1
+    done
+}
+
+# ============================================================================
+# MAIN EXECUTION
+# ============================================================================
+
+log "======================================"
+log "CarrotOS Init System - PID 1"
+log "======================================"
+
+# Execute initialization stages
+mount_filesystems
+setup_hostname
+setup_logging
+load_services
+mount_overlays
+spawn_services
+
+# Enter main loop
+main_loop

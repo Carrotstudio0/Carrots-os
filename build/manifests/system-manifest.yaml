@@ -1,0 +1,78 @@
+# CarrotOS System Manifest
+# Defines the complete system composition and configuration
+
+---
+manifest_version: 1
+system_id: carrotos
+system_name: CarrotOS
+system_version: 1.0.0
+codename: Carrot-LTS
+release_date: 2026-02-25
+
+# Kernel configuration
+kernel:
+  track: lts
+  version: 5.15.0
+  config: kernel/config/carrotos-lts.config
+  target_arch: x86_64
+  optimization: -O2
+  modules_enabled: true
+
+# Bootloader
+bootloader:
+  type: grub2
+  efi_support: true
+  bios_support: true
+  timeout_seconds: 5
+  default_entry: 0
+
+# Root filesystem
+rootfs:
+  base_image: rootfs/base
+  base_format: squashfs
+  compression: xz
+  read_only: true
+
+# Overlay configuration
+overlay:
+  order_file: build/manifests/overlay-order.yaml
+  lower_dirs:
+    - overlays/base
+    - overlays/edition/desktop
+  upper_dir: /mnt/overlay-rw
+  mount_point: /
+
+# Security
+security:
+  secure_mode_default: true
+  apparmor_enabled: true
+  firewall_enabled: true
+  policy_bundle: security/policies
+  audit_enabled: true
+
+# Desktop environment
+desktop:
+  display_server: wayland
+  shell: desktop/shell
+  compositor: desktop/compositor
+  theme: carrot-default
+  compositor_config: desktop/shell/ui/shell.conf
+
+# Core services
+services:
+  definitions_dir: services/system/
+  init_system: carrot-init
+  service_manager: systemd-compatible
+
+# Build settings
+build:
+  parallel_jobs: 4
+  compression_threads: 4
+  strip_binaries: true
+  debug_retained: minimal
+
+# Diagnostics and logging
+logging:
+  kernel_log_level: 3
+  audit_log: true
+  service_logs: /var/log/

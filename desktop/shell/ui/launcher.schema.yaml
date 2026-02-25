@@ -1,0 +1,13 @@
+version: 1
+launcher:
+  mode: search-first
+  categories:
+    - system
+    - utilities
+    - development
+    - media
+  quick_actions:
+    - lock
+    - sleep
+    - restart
+    - shutdown

@@ -1,0 +1,57 @@
+# CarrotOS Overlay Order Manifest
+# Defines the layering order and composition strategy
+
+---
+# Overlay layers (bottom to top)
+overlay_order:
+  # Base system layer
+  - name: base
+    path: overlays/base/
+    readonly: true
+    priority: 100
+    description: "Core system distribution"
+    
+  # Desktop edition layer
+  - name: edition-desktop
+    path: overlays/edition/desktop/
+    readonly: true
+    priority: 200
+    description: "Desktop environment and applications"
+    
+  # OEM customizations
+  - name: oem
+    path: overlays/oem/
+    readonly: true
+    priority: 250
+    description: "OEM-specific system modifications"
+    
+  # User customizations
+  - name: custom
+    path: overlays/custom/
+    readonly: false
+    priority: 300
+    description: "User-made customizations"
+
+# Upper (writable) layer
+upper_layer:
+  name: runtime
+  type: tmpfs-or-persistent
+  persistent_label: CARROT_PERSIST
+  fallback: tmpfs  # If persistent not available
+  path: /mnt/overlay-rw
+  work_dir: /mnt/overlay-work
+
+# Mount configuration
+mount:
+  target: /
+  fstype: overlay
+  options:
+    - lowerdir specified by layer order
+    - upperdir from upper_layer
+    - workdir specified
+    
+# Security
+restrictions:
+  secure_mode_reject_unsigned: true
+  verify_signatures: true
+  signature_key: /etc/carrot/keys/overlay.pub
